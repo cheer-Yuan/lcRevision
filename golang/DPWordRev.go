@@ -2,8 +2,8 @@ package main
 
 import "fmt"
 
-// lc 151 : reverse the order of the words in a given string, remove space at the beginning / end and double space
-// space O(n), in c++ : use dp + resize
+// reverse the order of the words in a given string, remove space at the beginning / end and double space
+// time : O(n), space O(1), in c++ : use dp + resize
 func WordRev(input []string) []string {
 
 	/*first reverse : the entire string*/
