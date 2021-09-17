@@ -1,4 +1,15 @@
+
+C++中stack 是容器么？
+
+我们使用的stack是属于那个版本的STL？
+
+我们使用的STL中stack是如何实现的？
+
+stack 提供迭代器来遍历stack空间么？
+
 ## stack 
+首先大家要知道 栈和队列是STL（C++标准库）里面的两个数据结构。
+
 stack : FILO, queue : FIFO
 gcc : SGI STL
 
