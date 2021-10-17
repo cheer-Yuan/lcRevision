@@ -5,6 +5,11 @@ type StackOfInt struct {
 	stack []int
 }
 
+type StackOfNode struct {
+	stack
+
+}
+
 func (thisStack *StackOfInt) push (element int) {
 	thisStack.stack = append(thisStack.stack, element)
 }
