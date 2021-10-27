@@ -1,5 +1,7 @@
 package main
 
+//递归遍历二叉树
+
 func TreeTraversePreorder(treeNode *TreeNode, Values []int) {
 	if (treeNode == nil) {return}
 
@@ -25,7 +27,6 @@ func TreeTraversePostorder(treeNode *TreeNode, Values []int) {
 	TreeTraversePostorder(treeNode.left, Values)			//左子树
 	TreeTraversePostorder(treeNode.right, Values)		//右子树
 	Values = append(Values, treeNode.value)		//根节点
-
 }
 
 func TreeTraverseRecur(root *TreeNode) []int {
