@@ -1,7 +1,6 @@
 package main
 
-//递归遍历二叉树
-
+//递归遍历二叉树, 存储到values列表
 func TreeTraversePreorder(treeNode *TreeNode, Values []int) {
 	if (treeNode == nil) {return}
 
