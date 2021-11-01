@@ -1,4 +1,7 @@
 package main
+
+import "fmt"
+
 //
 //// time : average O(nlogn), worst O(n2)
 //func QSParint(a []int, min, max int)  {
@@ -8,6 +11,8 @@ package main
 //
 //
 //}
+//
+
 
 func Partition(list []int, low, high int) int {
 	// may use a random method to set the pivot
@@ -28,6 +33,7 @@ func Partition(list []int, low, high int) int {
 		//low指针值 > pivot low值 移到high位置
 		//low位置值空
 		list[high] = list[low]
+		fmt.Println(low, high, list)
 	}
 
 	list[low] = pivot

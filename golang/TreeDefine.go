@@ -7,23 +7,23 @@ type TreeNode struct {
 
 
 type StackOfTreeNode struct {
-	stack []TreeNode
+	stack []*TreeNode
 }
 
 
 
-func (thisStack *StackOfTreeNode) push (element TreeNode) {
+func (thisStack *StackOfTreeNode) push (element *TreeNode) {
 	thisStack.stack = append(thisStack.stack, element)
 }
 
-func (thisStack *StackOfTreeNode) pop() int {
+func (thisStack *StackOfTreeNode) pop() *TreeNode {
 	buff := thisStack.peek()
 	thisStack.stack = thisStack.stack[:len(thisStack.stack) -1]
 	return buff
 }
 
-func (thisStack *StackOfTreeNode) peek() int {
-	return thisStack.stack[len(thisStack.stack) - 1].value
+func (thisStack *StackOfTreeNode) peek() *TreeNode {
+	return thisStack.stack[len(thisStack.stack) - 1]
 }
 
 func (thisStack *StackOfTreeNode) size() int {

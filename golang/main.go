@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main()  {
 	//string1 := []string{" ", " ", "a", "b", "c", " ", " ", "d", " ", " "}
 	//string2 := []string{"a", "b", "c", " ", " ", "d"}
@@ -85,6 +87,8 @@ func main()  {
 	//)
 	////OK
 
-
+	a := []int{2, 3, 1, 8, 7, 5, 9, 4, 6}
+	QuickSort(a, 0, 8)
+	fmt.Println(a)
 }
 
