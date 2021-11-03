@@ -87,8 +87,6 @@ func main()  {
 	//)
 	////OK
 
-	a := []int{2, 3, 1, 8, 7, 5, 9, 4, 6}
-	QuickSort(a, 0, 8)
-	fmt.Println(a)
+	fmt.Println(generateParenthesis(4))
 }
 

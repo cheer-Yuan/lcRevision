@@ -2,16 +2,17 @@ package main
 
 import "fmt"
 
-//
+
 //// time : average O(nlogn), worst O(n2)
 //func QSParint(a []int, min, max int)  {
 //
 //}
+//
 //func QSint(a []int) []int {
 //
 //
 //}
-//
+
 
 
 func Partition(list []int, low, high int) int {
@@ -19,7 +20,7 @@ func Partition(list []int, low, high int) int {
 	pivot := list[low]
 
 	for low < high {
-		//pivot < pointer
+		//pivot < pointerx
 		for low < high && pivot <= list[high] {
 			high--
 		}
