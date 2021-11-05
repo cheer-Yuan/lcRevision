@@ -87,6 +87,6 @@ func main()  {
 	//)
 	////OK
 
-	fmt.Println(generateParenthesis(4))
+	fmt.Println(integerBreak(5))
 }
 
