@@ -87,6 +87,11 @@ func main()  {
 	//)
 	////OK
 
-	fmt.Println(integerBreak(5))
+	//DyP : DyPMaxiNumOfSearchingTree
+	//fmt.Println(integerBreak(5))
+
+
+	//DyP : DyPMaxiNumOfSearchingTree
+	fmt.Println(numOfSearchTree(3))
 }
 
