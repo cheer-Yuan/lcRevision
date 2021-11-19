@@ -7,3 +7,11 @@ func MaxOf2(i, j int) int {
 		return j
 	}
 }
+
+func abs(i int) int {
+	if i < 0 {
+		return - i
+	} else {
+		return i
+	}
+}
