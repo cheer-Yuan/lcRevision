@@ -30,15 +30,31 @@ dp[i][j]: 最多有i个0和j个1的strs的最大子集的大小
 
 
 func findMaxForm(strs []string, m int, n int) int {
-	dp := make([][]int, m)
+	dp := make([][]int, m + 1)
 	for i, _ := range dp {
-		dp[i] = make([]int, n)
+		dp[i] = make([]int, n + 1)
 	}
 
 	for _, str := range strs {
-		// count 0s and 1s
+		M, N := 0, 0
 
-		for
+		// count 0s and 1s
+		for _, i := range str {
+			if i == '0' {
+				M++
+			} else if i == '1' {
+				N++
+			}
+		}
+
+		for i := m; i >= M; i-- {
+			for j := n; j >= N; j-- {
+				dp[i][j] = MaxOf2(dp[i][j], dp[i - M][j - N] + 1)
+			}
+
+		}
+
 	}
 
+	return dp[m][n]
 }
