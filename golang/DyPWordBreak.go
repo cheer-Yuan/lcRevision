@@ -14,9 +14,37 @@ package main
 思路：可以分割 --> 装满背包
 重复使用：完全背包
 
+dp[j] = dp[j - len(i)] and if j-i ... j 出现在字典中
+i < j
 
+初始化： dp[0] = true, else = false
 */
 
 func wordBreak(s string, wordDict []string) bool {
+	leng := len(s)
+	dp := make([]bool, leng + 1)
+	dp[0] = true
 
+	for i := 1; i <= leng; i++ {
+		for j := 1; j <= i; j++ {
+			if dp[j - 1] == false {
+				continue
+			}
+
+			IfAppear := false
+			for _, temp := range wordDict {
+				if s[j - 1 : i] == temp {
+					IfAppear = true
+					break
+				}
+			}
+
+			if IfAppear {
+				dp[i] = true
+				break
+			}
+		}
+	}
+
+	return dp[leng]
 }
