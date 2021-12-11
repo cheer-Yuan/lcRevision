@@ -244,3 +244,84 @@ func maxSubArray1(nums []int) int {
 
 	return result
 }
+
+
+/*
+给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
+
+字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，"ace"是"abcde"的一个子序列，而"aec"不是）。
+
+进阶：
+如果有大量输入的 S，称作 S1, S2, ... , Sk 其中 k >= 10亿，你需要依次检查它们是否为 T 的子序列。在这种情况下，你会怎样改变代码？
+
+思路：
+i in len s, j in len t
+dp[i][j] ： i-1和j-1的公共子序列长度
+
+双指针贪心：O n
+进阶情况优化思路：对于每个字母寻找在目标字符串中的位置是重复动作，考虑建立直接查询关系
+
+dp[i]][j], T字符串中从字母i往后的每个字母，在dict j中出现的最早位置，
+i : 字符串T长度 + 1，从后向前遍历  j：字典长度，从前向后遍历
+初始化：最后一行，值初始化为T长度
+
+查询s : 先搜索第一个字符s[0]: 考察dp[0][对应s[0]] 的值，
+	== 0 false（因为第一行存储了包括T[0]以及之后所有字符在dict中的位置）
+	!= 0 --> s[0]出现在T中的第dp位 --> 考察s[1] --> 考察第dp + i行，因为只需要考察单词T中第dp位后的字符
+*/
+
+func isSubsequence(s string, t string) bool {
+	lenS, lenT := len(s), len(t)
+	dp := make([][26]int, lenT + 1)
+
+	//初始化最后一行
+	for i := 0; i < 26; i++ {
+		dp[lenT][i] = 9999
+	}
+
+	//dp初始化矩阵
+	for indexT := lenT - 1; indexT >= 0; indexT-- {
+		for indexDict := 0; indexDict < 26; indexDict++ {
+			if int(t[indexT]) == 97 + indexDict {
+				dp[indexT][indexDict] = indexT		//该字母出现： 将值初始化为当前字母下标
+			} else {
+				dp[indexT][indexDict] = dp[indexT + 1][indexDict]	//未出现，继承下方格子的值
+			}
+		}
+	}
+
+	//查询字符串s
+	indexLine := 0
+	for indexS := 0; indexS < lenS; indexS++ {
+		if dp[indexLine][s[indexS] - 97] == 9999 {
+			return false
+		} else {
+			indexLine = dp[indexLine][s[indexS] - 97] + 1
+		}
+	}
+
+	return true
+}
+
+
+
+/*
+给定一个字符串 s 和一个字符串 t ，计算在 s 的子序列中 t 出现的个数。
+
+字符串的一个 子序列 是指，通过删除一些（也可以不删除）字符且不干扰剩余字符相对位置所组成的新字符串。（例如，"ACE"是"ABCDE"的一个子序列，而"AEC"不是）
+
+题目数据保证答案符合 32 位带符号整数范围。
+
+输入：s = "rabbbit", t = "rabbit"
+输出：3
+
+输入：s = "babgbag", t = "bag"
+输出：5
+
+
+
+*/
+
+func numDistinct(s string, t string) int {
+
+}

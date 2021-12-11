@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 func main()  {
 	//string1 := []string{" ", " ", "a", "b", "c", " ", " ", "d", " ", " "}
 	//string2 := []string{"a", "b", "c", " ", " ", "d"}
@@ -91,6 +95,9 @@ func main()  {
 
 	//DyP : DyPMaxiNumOfSearchingTree
 	//fmt.Println(numOfSearchTree(3))
+
+	a := "ab"
+	fmt.Println(int(a[0]) == 97)
 
 }
 
