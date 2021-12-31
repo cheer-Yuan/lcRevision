@@ -318,10 +318,46 @@ func isSubsequence(s string, t string) bool {
 输入：s = "babgbag", t = "bag"
 输出：5
 
+思路：类似上题，i in t, j in s
+dp[i][j]：前 i 个字符的 s 子串中，出现前 j 个字符的 t 子串的次数
 
+画表：
+  0 b a b g b a g
+0 1 1 1 1 1 1 1 1 // 空为任意子串
+b 0 1 1 2 2 3 3 3
+a 0 0 1 1 1 1 4 4
+g 0 0 0 0 1 1 1 5
+🔺分析两种情况
+s[i - 1] != t[j - 1]：
+	不进行匹配，dp[i][j] = dp[i][j - 1]
+s[i - 1] = t[j - 1]：
+	1. 不使用 i - 1 匹配，同上一种情况：dp[i][j] = dp[i][j - 1]
+	2. 使用 i - 1 匹配，加上dp[i - 1][j - 1]的值
+	综上，dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1]
 
 */
 
 func numDistinct(s string, t string) int {
+	lenS, lenT := len(s), len(t)
+	dp := make([][]int, lenT + 1)
+	for i := 0; i <= lenT; i++ {
+		dp[i] = make([]int, lenS + 1)
+	}
 
+	//初始化
+	for j := 0; j <= lenS; j++ {
+		dp[0][j] = 1
+	}
+
+	for i := 1; i <= lenT; i++ {
+		for j := i; j <= lenS; j++ {
+			if s[j - 1] != t[i - 1] {
+				dp[i][j] = dp[i][j - 1]
+			} else {
+				dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1]
+			}
+		}
+	}
+
+	return dp[lenT][lenS]
 }
