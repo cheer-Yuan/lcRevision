@@ -1,16 +1,14 @@
 package main
 
 type TreeNode struct {
-	value int
-	left, right *TreeNode
+	Val         int
+	Left, Right *TreeNode
 }
 
 
 type StackOfTreeNode struct {
 	stack []*TreeNode
 }
-
-
 
 func (thisStack *StackOfTreeNode) push (element *TreeNode) {
 	thisStack.stack = append(thisStack.stack, element)
@@ -32,6 +30,38 @@ func (thisStack *StackOfTreeNode) size() int {
 
 func (thisStack *StackOfTreeNode) isEmpty() bool {
 	if len(thisStack.stack) == 0 {
+		return true
+	} else {
+		return false
+	}
+}
+
+
+
+type QueueOfTreeNode struct {
+	queue []*TreeNode
+}
+
+func (thisQueue *QueueOfTreeNode) push (element *TreeNode) {
+	thisQueue.queue = append(thisQueue.queue, element)
+}
+
+func (thisQueue *QueueOfTreeNode) pop() *TreeNode {
+	buff := thisQueue.peek()
+	thisQueue.queue = thisQueue.queue[1 :len(thisQueue.queue)]
+	return buff
+}
+
+func (thisQueue *QueueOfTreeNode) peek() *TreeNode {
+	return thisQueue.queue[0]
+}
+
+func (thisQueue *QueueOfTreeNode) size() int {
+	return len(thisQueue.queue)
+}
+
+func (thisQueue *QueueOfTreeNode) isEmpty() bool {
+	if len(thisQueue.queue) == 0 {
 		return true
 	} else {
 		return false

@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main()  {
 	//string1 := []string{" ", " ", "a", "b", "c", " ", " ", "d", " ", " "}
@@ -96,8 +94,13 @@ func main()  {
 	//DyP : DyPMaxiNumOfSearchingTree
 	//fmt.Println(numOfSearchTree(3))
 
-	a := "ab"
-	fmt.Println(int(a[0]) == 97)
+	//a := "ab"
+	//fmt.Println(int(a[0]) == 97)
 
+	//full permutation
+	//printFullPermute("abc", 0)
+
+	//trunc
+	fmt.Println(trunc(12345.515313))
 }
 

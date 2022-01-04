@@ -96,8 +96,8 @@ func rob2(nums []int) int {
 思路：
 本题一定是要后序遍历，因为通过递归函数的返回值来做下一步计算。
 对于某个节点：dp[0]: 不偷，dp[1]：偷
-	不偷 --> 左右都可以偷：dp[0] = max(left[0], left[1]) + max(right[0], right[1])
-	偷：不偷左右子节点 --> dp[1] = node.val + left[0] + right[0]
+	不偷 --> 左右都可以偷：dp[0] = max(Left[0], Left[1]) + max(Right[0], Right[1])
+	偷：不偷左右子节点 --> dp[1] = node.val + Left[0] + Right[0]
 */
 
 
@@ -120,10 +120,10 @@ func robNode(node *TreeNode) []int {
 	}
 
 	//遍历
-	left := robNode(node.left)
-	right := robNode(node.right)
+	left := robNode(node.Left)
+	right := robNode(node.Right)
 
 	//偷当前：左右不偷
-	return []int{MaxOf2(left[0], left[1]) + MaxOf2(right[0], right[1]), node.value + left[0] + right[0]}
+	return []int{MaxOf2(left[0], left[1]) + MaxOf2(right[0], right[1]), node.Val + left[0] + right[0]}
 
 }
