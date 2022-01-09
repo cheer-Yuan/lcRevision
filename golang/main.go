@@ -101,6 +101,21 @@ func main()  {
 	//printFullPermute("abc", 0)
 
 	//trunc
-	fmt.Println(trunc(12345.515313))
+	//fmt.Println(trunc(12345.515313))
+
+	//TreeInverse
+	a1 := TreeNode{1, nil,nil}
+	a2 := TreeNode{2, nil, nil}
+	a := &TreeNode{
+		0,
+		&a1,
+		&a2}
+	//fmt.Println(a.Left, a.Right)
+	//b := *invertTreeIter(&a)
+	//fmt.Println(b.Left, b.Right
+
+	//list := []*TreeNode{}
+	//TreeTraverseIterativeMidorder(&a, list)
+	fmt.Println(TreeTraversePreorder(a))
 }
 

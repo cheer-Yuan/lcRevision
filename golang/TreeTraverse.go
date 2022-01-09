@@ -1,13 +1,19 @@
 package main
 
 //递归遍历二叉树, 存储到values列表
-func TreeTraversePreorder(treeNode *TreeNode, Values []int) {
-	if (treeNode == nil) {return}
+func TreeTraversePreorder(treeNode *TreeNode) []int {
+	var traverse func(node *TreeNode)
+	results := []int{}
 
-	//前序
-	Values = append(Values, treeNode.Val)        //根节点
-	TreeTraversePreorder(treeNode.Left, Values)  //左子树
-	TreeTraversePreorder(treeNode.Right, Values) //右子树
+	traverse = func(node *TreeNode) {
+		if (treeNode == nil) {return}
+		results = append(results, treeNode.Val)
+		traverse(treeNode.Left)
+		traverse(treeNode.Right)
+	}
+
+	traverse(treeNode)
+	return results
 }
 
 func TreeTraverseInorder(treeNode *TreeNode, Values []int) {
@@ -28,13 +34,6 @@ func TreeTraversePostorder(treeNode *TreeNode, Values []int) {
 	Values = append(Values, treeNode.Val)         //根节点
 }
 
-func TreeTraverseRecur(root *TreeNode) []int {
-	results := make([]int, 0)
-
-	TreeTraversePreorder(root, results)
-
-	return  results
-}
 
 // iterative traverse : 入栈：根，右，左
 func TreeTraverseIterativeMidorder(root *TreeNode, ListOfNodes []*TreeNode) {
@@ -128,15 +127,15 @@ func levelOrder(root *TreeNode) [][]int {
 	}
 
 	queue := new(QueueOfTreeNode)
-	queue.push(root)
+	queue.push(root)				// 根入队列
 
 	for !queue.isEmpty() {
-		NumOfThisLayer := queue.size()
+		NumOfThisLayer := queue.size()		// 记录本层节点数
 		subresult := []int{}
 		for i := 0; i < NumOfThisLayer; i++ {
 			node := queue.pop()
-			subresult = append(subresult, node.Val)
-			if node.Left != nil {
+			subresult = append(subresult, node.Val)		// 本层节点加入结果集
+			if node.Left != nil {						// 节点的左右子节点加入队列，等待下一轮加入结果集
 				queue.push(node.Left)
 			}
 			if node.Right != nil {
@@ -149,3 +148,5 @@ func levelOrder(root *TreeNode) [][]int {
 
 	return result
 }
+
+

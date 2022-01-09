@@ -18,6 +18,5 @@ func STDIN(s string) int {
 
 
 	return 0
-
 }
 
