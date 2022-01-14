@@ -104,15 +104,21 @@ func main()  {
 	//fmt.Println(trunc(12345.515313))
 
 	//TreeInverse
-	a11 := TreeNode{11, nil, nil}
-	a12 := TreeNode{12, nil, nil}
-	a1 := TreeNode{1, &a11,&a12}
-	a2 := TreeNode{2, nil, nil}
-	a := TreeNode{
-		0,
-		&a1,
-		&a2}
-	b := invertTreeIter(&a)
-	fmt.Println(b.Right.Right)
+	//a11 := TreeNode{11, nil, nil}
+	//a12 := TreeNode{12, nil, nil}
+	//a1 := TreeNode{1, &a11,&a12}
+	//a2 := TreeNode{2, nil, nil}
+	//a := TreeNode{
+	//	0,
+	//	&a1,
+	//	&a2}
+	//b := invertTreeIter(&a)
+	//fmt.Println(b.Right.Right)
+
+	// LinkedNode
+	A1, A2 := newNode(0, nil), newNode(1, nil)
+	fmt.Println(A1.Val, A2.Val)
+	A1.Next = A2
+	fmt.Println(A1.Next.Val)
 }
 

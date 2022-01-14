@@ -1,6 +1,8 @@
 package main
 
-import "strconv"
+import (
+	"strconv"
+)
 
 /*
 翻转一棵二叉树。
@@ -21,7 +23,6 @@ import "strconv"
   7     2
  / \   / \
 9   6 3   1
-
 */
 // 递归翻转二叉树：
 func invertTreeRec(root *TreeNode) *TreeNode {
@@ -343,4 +344,119 @@ func findBottomLeftValue(root *TreeNode) int {
 	traverse(root, 1)
 
 	return maxLeft
+}
+
+/*112. 路径总和
+给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
+
+说明: 叶子节点是指没有子节点的节点。
+
+示例:  给定如下二叉树，以及目标和 sum = 22，
+*/
+// 无返回值，整棵树 -> 前序遍历
+func hasPathSum1(root *TreeNode, targetSum int) bool {
+	var traverse func(node *TreeNode, sum int)
+
+	result := false
+
+	traverse = func(node *TreeNode, sum int) {
+		if node != nil && node.Left == nil && node.Right == nil && node.Val + sum == targetSum {
+			result = true
+		}
+
+		if node != nil {
+			sum += node.Val
+
+			if node.Left != nil {
+				traverse(node.Left, sum)
+			}
+			if node.Right != nil {
+				traverse(node.Right, sum)
+			}
+		}
+
+	}
+	traverse(root, 0)
+
+	return result
+}
+
+/*路径总和 II
+给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。
+叶子节点 是指没有子节点的节点。
+*/
+func hasPathSum(root *TreeNode, targetSum int) [][]int {
+	var traverse func(node *TreeNode, path []int, sum int)
+
+	result := [][]int{}
+
+	traverse = func(node *TreeNode, path []int, sum int) {
+		if node != nil && node.Left == nil && node.Right == nil && node.Val + sum == targetSum {
+			temp := []int{}
+			for _, val := range path {		// 防止值的变化
+				temp = append(temp, val)
+			}
+			temp = append(temp, node.Val)
+			result = append(result, temp)
+		}
+
+		if node != nil {
+			sum += node.Val
+			path = append(path, node.Val)
+			if node.Left != nil {
+				traverse(node.Left, path, sum)
+			}
+			if node.Right != nil {
+				traverse(node.Right, path, sum)
+			}
+		}
+
+	}
+	traverse(root, []int{}, 0)
+
+	return result
+}
+
+/*
+106. 从中序与后序遍历序列构造二叉树
+
+首先回忆一下如何根据两个顺序构造一个唯一的二叉树，相信理论知识大家应该都清楚，就是以 后序数组的最后一个元素为切割点，先切中序数组，根据中序数组，反过来在切后序数组。一层一层切下去，每次后序数组最后一个元素就是节点元素。
+
+第一步：如果数组大小为零的话，说明是空节点了。
+
+第二步：如果不为空，那么取后序数组最后一个元素作为节点元素。
+
+第三步：找到后序数组最后一个元素在中序数组的位置，作为切割点
+
+第四步：切割中序数组，切成中序左数组和中序右数组 （顺序别搞反了，一定是先切中序数组）
+
+第五步：切割后序数组，切成后序左数组和后序右数组
+
+第六步：递归处理左区间和右区间
+*/
+
+func buildTree1(inorder []int, postorder []int) *TreeNode {
+	// 1. 数组长度为零：空节点
+	if len(inorder) == 0 || len(postorder) == 0 {
+		return nil
+	}
+	// 2. 取后序最后节点为根
+	racine := postorder[len(postorder) - 1]	// 后序最末元素为根节点值
+	// 3. 找到根在中序排列中的位置作为切割点
+	index := 0
+	for ; index < len(inorder) && inorder[index] != racine; index++ {}	// 中序切割点
+	// 6. 递归处理
+	return &TreeNode{
+		Val: racine,
+		Left: buildTree1(inorder[:index], postorder[:index]),	// 4,
+		Right: buildTree1(inorder[index + 1:], postorder[index:len(postorder) - 1]),	// 5, 后续数组除去最后一个元素
+	}
+}
+
+
+/*
+105. 从前序与中序遍历序列构造二叉树
+*/
+func buildTree(preorder []int, inorder []int) *TreeNode {
+
 }
