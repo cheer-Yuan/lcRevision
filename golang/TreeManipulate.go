@@ -417,46 +417,31 @@ func hasPathSum(root *TreeNode, targetSum int) [][]int {
 	return result
 }
 
-/*
-106. 从中序与后序遍历序列构造二叉树
 
-首先回忆一下如何根据两个顺序构造一个唯一的二叉树，相信理论知识大家应该都清楚，就是以 后序数组的最后一个元素为切割点，先切中序数组，根据中序数组，反过来在切后序数组。一层一层切下去，每次后序数组最后一个元素就是节点元素。
+/*236. 二叉树的最近公共祖先
+给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
 
-第一步：如果数组大小为零的话，说明是空节点了。
+最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
 
-第二步：如果不为空，那么取后序数组最后一个元素作为节点元素。
-
-第三步：找到后序数组最后一个元素在中序数组的位置，作为切割点
-
-第四步：切割中序数组，切成中序左数组和中序右数组 （顺序别搞反了，一定是先切中序数组）
-
-第五步：切割后序数组，切成后序左数组和后序右数组
-
-第六步：递归处理左区间和右区间
+思路：自底向上回溯查找：后序遍历
 */
+func lowestCommonAncestor1(root, p, q *TreeNode) *TreeNode {
+	// 后序遍历
+	if  root == nil || root.Val == p.Val || root.Val == q.Val {	// 如找到节点：传回该节点
+		return root
+	}
 
-func buildTree1(inorder []int, postorder []int) *TreeNode {
-	// 1. 数组长度为零：空节点
-	if len(inorder) == 0 || len(postorder) == 0 {
+	left := lowestCommonAncestor1(root.Left, p ,q)
+	right := lowestCommonAncestor1(root.Right, p, q)
+
+	if left != nil && right != nil {	// 左右子节点都有值传来：本节点为最近公共祖先
+		return root
+	}
+	if left == nil && right != nil {
+		return right
+	} else if left != nil && right == nil {
+		return left
+	} else {
 		return nil
 	}
-	// 2. 取后序最后节点为根
-	racine := postorder[len(postorder) - 1]	// 后序最末元素为根节点值
-	// 3. 找到根在中序排列中的位置作为切割点
-	index := 0
-	for ; index < len(inorder) && inorder[index] != racine; index++ {}	// 中序切割点
-	// 6. 递归处理
-	return &TreeNode{
-		Val: racine,
-		Left: buildTree1(inorder[:index], postorder[:index]),	// 4,
-		Right: buildTree1(inorder[index + 1:], postorder[index:len(postorder) - 1]),	// 5, 后续数组除去最后一个元素
-	}
-}
-
-
-/*
-105. 从前序与中序遍历序列构造二叉树
-*/
-func buildTree(preorder []int, inorder []int) *TreeNode {
-
 }
