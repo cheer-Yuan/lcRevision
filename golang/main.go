@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main()  {
 	//string1 := []string{" ", " ", "a", "b", "c", " ", " ", "d", " ", " "}
 	//string2 := []string{"a", "b", "c", " ", " ", "d"}
@@ -121,8 +123,10 @@ func main()  {
 	//fmt.Println(A1.Next.Val)
 
 	// delete node
-	 deleteNode(&a, 1
+	fmt.Println(a)
+	//
+	//TIME := "13:45"
+	//fmt.Println( int(TIME[0] - '0'))
 
-
-
+	//fmt.Println(matPower(2, 3, [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}))
 }
