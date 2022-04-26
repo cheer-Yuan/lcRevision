@@ -5,7 +5,7 @@ func checkValidParanthese(parenthese string) bool {
 		return true
 	}
 
-	a := StackOfInt{stack: make([]int, 0)}
+	a := Stack{stack: make([]int, 0)}
 	for i := 0; i < len(parenthese); i++ {
 		if parenthese[i] == '[' {
 			a.push(']')

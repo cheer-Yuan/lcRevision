@@ -23,7 +23,7 @@ func MinOf2(i, j int) int {
 
 func abs(i int) int {
 	if i < 0 {
-		return - i
+		return -i
 	} else {
 		return i
 	}
@@ -51,12 +51,12 @@ func trunc(f float64) float64 {
 		parsDec++
 	}
 
-	return float64(partInt) + float64(parsDec) / 100
+	return float64(partInt) + float64(parsDec)/100
 }
 
 // 矩阵幂乘
 func matPower(n, size int, mat [][]int) [][]int {
-	result := [][]int{}		// 初始化
+	result := [][]int{} // 初始化
 	for i := 0; i < size; i++ {
 		temp := []int{}
 		for j := 0; j < size; j++ {
@@ -66,7 +66,7 @@ func matPower(n, size int, mat [][]int) [][]int {
 	}
 
 	iter := 0
-	for iter < n - 1 {
+	for iter < n-1 {
 		power := [][]int{}
 		for row := 0; row < size; row++ {
 			prow := []int{}
@@ -82,6 +82,18 @@ func matPower(n, size int, mat [][]int) [][]int {
 		result = power
 		iter++
 	}
-
 	return result
+}
+
+func sub2D(a, b []int) []int {
+	return []int{a[0] - b[0], a[1] - b[1]}
+}
+
+// 计算向量的叉积 pq x qr， 如果叉积小于 0，可以知道向量顺时针旋转， 否则逆时针旋转。
+func cross(p, q, r []int) int {
+	return (q[0]-p[0])*(r[1]-q[1]) - (q[1]-p[1])*(r[0]-q[0])
+}
+
+func distance2D(p, q []int) int {
+	return (p[0]-q[0])*(p[0]-q[0]) + (p[1]-q[1])*(p[1]-q[1])
 }

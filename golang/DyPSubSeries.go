@@ -27,7 +27,7 @@ func lengthOfLIS(nums []int) int {
 		dp[i] = 1
 		for j := 0; j < i; j++ {
 			if nums[i] > nums[j] {
-				dp[i] = MaxOf2(dp[i], dp[j] + 1)
+				dp[i] = MaxOf2(dp[i], dp[j]+1)
 			}
 			if dp[i] > result {
 				result = dp[i]
@@ -60,8 +60,6 @@ dp[i]：以下标i为结尾的数组的连续递增的子序列长度为dp[i]。
 dp[0] = 1
 */
 
-
-
 func findLengthOfLCIS(nums []int) int {
 	length := len(nums)
 	dp := make([]int, length)
@@ -69,10 +67,10 @@ func findLengthOfLCIS(nums []int) int {
 	dp[0] = 1
 	result := dp[0]
 	for i := 1; i < length; i++ {
-		if nums[i - 1] >= nums[i] {
+		if nums[i-1] >= nums[i] {
 			dp[i] = 1
 		} else {
-			dp[i] = dp[i - 1] + 1
+			dp[i] = dp[i-1] + 1
 		}
 		if dp[i] > result {
 			result = dp[i]
@@ -81,8 +79,6 @@ func findLengthOfLCIS(nums []int) int {
 
 	return result
 }
-
-
 
 /*
 最长连续公共子序列：
@@ -110,16 +106,16 @@ func findLength(nums1 []int, nums2 []int) int {
 	if lengthA == 0 || lengthB == 0 {
 		return 0
 	}
-	dp := make([][]int, lengthA + 1)
+	dp := make([][]int, lengthA+1)
 	for i := 0; i <= lengthA; i++ {
-		dp[i] = make([]int, lengthB + 1)
+		dp[i] = make([]int, lengthB+1)
 	}
 
 	result := 0
 	for i := 1; i <= lengthA; i++ {
 		for j := 1; j <= lengthB; j++ {
-			if nums1[i - 1] == nums2[j - 1] {
-				dp[i][j] = dp[i - 1][j - 1] + 1
+			if nums1[i-1] == nums2[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
 				if dp[i][j] > result {
 					result = dp[i][j]
 				}
@@ -129,8 +125,6 @@ func findLength(nums1 []int, nums2 []int) int {
 
 	return result
 }
-
-
 
 /*
 最长公共子序列
@@ -157,24 +151,23 @@ func longestCommonSubsequence(text1 string, text2 string) int {
 	if lengthA == 0 || lengthB == 0 {
 		return 0
 	}
-	dp := make([][]int, lengthA + 1)
+	dp := make([][]int, lengthA+1)
 	for i := 0; i <= lengthA; i++ {
-		dp[i] = make([]int, lengthB + 1)
+		dp[i] = make([]int, lengthB+1)
 	}
 
 	for i := 1; i <= lengthA; i++ {
 		for j := 1; j <= lengthB; j++ {
-			if text1[i - 1] == text2[j - 1] {
-				dp[i][j] = dp[i - 1][j - 1] + 1
+			if text1[i-1] == text2[j-1] {
+				dp[i][j] = dp[i-1][j-1] + 1
 			} else {
-				dp[i][j] = MaxOf2(dp[i][j - 1], dp[i - 1][j])
+				dp[i][j] = MaxOf2(dp[i][j-1], dp[i-1][j])
 			}
 		}
 	}
 
 	return dp[lengthA][lengthB]
 }
-
 
 /*
 在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数。
@@ -197,24 +190,23 @@ dp[i][j] ：i - 1 & j - 1 最长公共子序列
 func maxUncrossedLines(nums1 []int, nums2 []int) int {
 	len1, len2 := len(nums1), len(nums2)
 
-	dp := make([][]int, len1 + 1)
+	dp := make([][]int, len1+1)
 	for i := 0; i <= len1; i++ {
-		dp[i] = make([]int, len2 + 1)
+		dp[i] = make([]int, len2+1)
 	}
 
 	for index1 := 1; index1 <= len1; index1++ {
 		for index2 := 1; index2 <= len2; index2++ {
-			if nums1[index1 - 1] == nums2[index2 - 1] {
-				dp[index1][index2] = dp[index1 - 1][index2 - 1] + 1
+			if nums1[index1-1] == nums2[index2-1] {
+				dp[index1][index2] = dp[index1-1][index2-1] + 1
 			} else {
-				dp[index1][index2] = MaxOf2(dp[index1 - 1][index2], dp[index1][index2 - 1])
+				dp[index1][index2] = MaxOf2(dp[index1-1][index2], dp[index1][index2-1])
 			}
 		}
 	}
 
 	return dp[len1][len2]
 }
-
 
 /*
 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
@@ -236,7 +228,7 @@ func maxSubArray1(nums []int) int {
 	result := dp[0]
 
 	for i := 1; i < len; i++ {
-		dp[i] = MaxOf2(dp[i - 1] + nums[i], nums[i])
+		dp[i] = MaxOf2(dp[i-1]+nums[i], nums[i])
 		if result < dp[i] {
 			result = dp[i]
 		}
@@ -245,4 +237,51 @@ func maxSubArray1(nums []int) int {
 	return result
 }
 
+/*
+给你一个字符串 s 和一个字符串列表 wordDict 作为字典，判定s 是否可以由空格拆分为一个或多个在字典中出现的单词。
 
+说明：拆分时可以重复使用字典中的单词。
+
+示例 1：
+
+输入: s = "leetcode", wordDict = ["leet", "code"]
+输出: true
+解释: 返回 true 因为 "leetcode" 可以被拆分成 "leet code"
+
+思路：可以分割 --> 装满背包
+重复使用：完全背包
+
+dp[j] = dp[j - len(i)] and if j-i ... j 出现在字典中
+i < j
+
+初始化： dp[0] = true, else = false
+*/
+
+func wordBreak(s string, wordDict []string) bool {
+	leng := len(s)
+	dp := make([]bool, leng+1)
+	dp[0] = true
+
+	for i := 1; i <= leng; i++ {
+		for j := 1; j <= i; j++ {
+			if dp[j-1] == false {
+				continue
+			}
+
+			IfAppear := false
+			for _, temp := range wordDict {
+				if s[j-1:i] == temp {
+					IfAppear = true
+					break
+				}
+			}
+
+			if IfAppear {
+				dp[i] = true
+				break
+			}
+		}
+	}
+
+	return dp[leng]
+}

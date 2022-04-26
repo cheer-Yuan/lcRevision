@@ -9,8 +9,8 @@ package main
 
 //用栈实现队列
 type QueueByStack struct {
-	inStack StackOfInt
-	outStack StackOfInt
+	inStack  Stack
+	outStack Stack
 }
 
 // 放入queue

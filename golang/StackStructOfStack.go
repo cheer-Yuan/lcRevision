@@ -2,33 +2,33 @@ package main
 
 //栈
 
-type StackOfInt struct {
-	stack []int
+type Stack struct {
+	stack []interface{}
 }
 
-func (thisStack *StackOfInt) push(element int) {
+func (thisStack *Stack) push(element interface{}) {
 	thisStack.stack = append(thisStack.stack, element)
 }
 
-func (thisStack *StackOfInt) pop() int {
+func (thisStack *Stack) pop() interface{} {
 	buff := thisStack.peek()
 	thisStack.stack = thisStack.stack[:len(thisStack.stack)-1]
 	return buff
 }
 
-func (thisStack *StackOfInt) peek() int {
+func (thisStack *Stack) peek() interface{} {
 	if len(thisStack.stack) == 0 {
 		return 0
 	}
 	return thisStack.stack[len(thisStack.stack)-1]
 }
 
-func (thisStack *StackOfInt) size() int {
+func (thisStack *Stack) size() int {
 	return len(thisStack.stack)
 
 }
 
-func (thisStack *StackOfInt) isEmpty() bool {
+func (thisStack *Stack) isEmpty() bool {
 	if len(thisStack.stack) == 0 {
 		return true
 	} else {

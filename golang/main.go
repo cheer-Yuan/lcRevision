@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main()  {
+func main() {
 	//string1 := []string{" ", " ", "a", "b", "c", " ", " ", "d", " ", " "}
 	//string2 := []string{"a", "b", "c", " ", " ", "d"}
 	//string3 := []string{"a", "b", "c", " ", "d"}
@@ -11,11 +11,11 @@ func main()  {
 	//fmt.Println(WordRev(string2))
 	//fmt.Println(WordRev(string3))
 
-///*	reverse a chain, show the new head*/
-//	c := node{index: 2, next: nil}
-//	b := node{index: 1, next: &c}
-//	a := node{index: 0, next: &b}
-//	fmt.Println(ChainRev(a).index)
+	///*	reverse a chain, show the new head*/
+	//	c := node{index: 2, next: nil}
+	//	b := node{index: 1, next: &c}
+	//	a := node{index: 0, next: &b}
+	//	fmt.Println(ChainRev(a).index)
 
 	/* chain: find the entrance of a ring */
 	//i := node{index: 8, next: nil}
@@ -34,11 +34,10 @@ func main()  {
 	///* DPSum3Num */
 	//a := []int{-1, 0, 1, 2, -1, -4}
 
-
 	/*stack : make a queue by stack*/
 	//a := QueueByStack{
-	//	inStack:  StackOfInt{stack: make([]int, 0)}	,
-	//	outStack: StackOfInt{stack: make([]int, 0)},
+	//	inStack:  Stack{stack: make([]int, 0)}	,
+	//	outStack: Stack{stack: make([]int, 0)},
 	//}
 	//a.push(3)
 	//a.push(2)
@@ -90,7 +89,6 @@ func main()  {
 	//DyP : DyPMaxiNumOfSearchingTree
 	//fmt.Println(integerBreak(5))
 
-
 	//DyP : DyPMaxiNumOfSearchingTree
 	//fmt.Println(numOfSearchTree(3))
 
@@ -107,7 +105,7 @@ func main()  {
 	a21 := TreeNode{21, nil, nil}
 	a11 := TreeNode{11, nil, nil}
 	a12 := TreeNode{12, nil, nil}
-	a1 := TreeNode{1, &a11,&a12}
+	a1 := TreeNode{1, &a11, &a12}
 	a2 := TreeNode{2, &a21, nil}
 	a := TreeNode{
 		0,
