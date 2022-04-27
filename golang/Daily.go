@@ -228,3 +228,103 @@ func outerTrees(trees [][]int) [][]int {
 
 	return result
 }
+
+/*太平洋大西洋水流问题
+有一个 m × n 的矩形岛屿，与 太平洋 和 大西洋 相邻。“太平洋”处于大陆的左边界和上边界，而 “大西洋” 处于大陆的右边界和下边界。
+这个岛被分割成一个由若干方形单元格组成的网格。给定一个 m x n 的整数矩阵heights，heights[r][c]表示坐标 (r, c) 上单元格 高于海平面的高度 。
+岛上雨水较多，如果相邻单元格的高度 小于或等于 当前单元格的高度，雨水可以直接向北、南、东、西流向相邻单元格。水可以从海洋附近的任何单元格流入海洋。
+返回 网格坐标 resulT的 2D列表 ，其中result[i] = [ri, ci]表示雨水可以从单元格 (ri, ci) 流向 太平洋和大西洋 。
+
+输入: heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
+输出: [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]
+
+回溯深度优先搜索: 从矩阵的边界开始反向搜索寻找雨水流向边界的单元格，反向搜索时，每次只能移动到高度相同或更大的单元格
+搜索过程中需要记录每个单元格是否可以从太平洋反向到达以及是否可以从大西洋反向到达。反向搜索结束之后，遍历每个网格，如果一个网格既可以从太平洋反向到达也可以从大西洋反向到达，则该网格满足太平洋和大西洋都可以到达，将该网格添加到答案中。
+*/
+
+func pacificAtlantic(heights [][]int) [][]int {
+	// initializing
+	result := [][]int{}
+	directions := []struct{ x, y int }{{-1, 0}, {0, 1}, {1, 0}, {0, -1}}
+	nR, nC := len(heights), len(heights[0])
+	pac, atl := make([][]bool, nR), make([][]bool, nR)
+	for i := range pac {
+		pac[i] = make([]bool, nC)
+		atl[i] = make([]bool, nC)
+	}
+
+	// recursive function
+	var dfs func(int, int, [][]bool)
+	dfs = func(x, y int, ocean [][]bool) {
+		if ocean[x][y] { // meet an already iterated block : return
+			return
+		}
+		ocean[x][y] = true             // an eligible block
+		for _, i := range directions { // recursive detection for an eligible block
+			if nx, ny := x+i.x, y+i.y; 0 <= nx && nx < nR && 0 <= ny && ny < nC && heights[nx][ny] >= heights[x][y] {
+				dfs(nx, ny, ocean)
+			}
+		}
+	}
+
+	// dectection
+	for i := 0; i < nR; i++ {
+		for j := 0; j < nC; j++ {
+			if i == 0 || j == 0 { // initiate and search pacific
+				dfs(i, j, pac)
+			}
+			if i == nR-1 || j == nC-1 {
+				dfs(i, j, atl)
+			}
+		}
+	}
+
+	// pick eligible blocks
+	for i := 0; i < nR; i++ {
+		for j := 0; j < nC; j++ {
+			if atl[i][j] && pac[i][j] {
+				result = append(result, []int{i, j})
+			}
+		}
+	}
+
+	return result
+}
+
+/*
+给定一个长度为 n 的整数数组nums。
+假设arrk是数组nums顺时针旋转 k 个位置后的数组，我们定义nums的 旋转函数F为：
+F(k) = 0 * arrk[0] + 1 * arrk[1] + ... + (n - 1) * arrk[n - 1]
+返回F(0), F(1), ..., F(n-1)中的最大值。
+生成的测试用例让答案符合32 位 整数。
+
+输入: nums = [4,3,2,6]
+输出: 26
+解释:
+F(0) = (0 * 4) + (1 * 3) + (2 * 2) + (3 * 6) = 0 + 3 + 4 + 18 = 25
+F(1) = (0 * 6) + (1 * 4) + (2 * 3) + (3 * 2) = 0 + 4 + 6 + 6 = 16
+F(2) = (0 * 2) + (1 * 6) + (2 * 4) + (3 * 3) = 0 + 6 + 8 + 9 = 23
+F(3) = (0 * 3) + (1 * 2) + (2 * 6) + (3 * 4) = 0 + 2 + 12 + 12 = 26
+所以 F(0), F(1), F(2), F(3) 中的最大值是 F(3) = 26 。
+
+F(0) = 0 * [0] + 1 * [1] + .. + (n - 1) * [n - 1]
+F(1) = 1 * [0] + 2 * [1] + ... + 0 * [n - 1] = F(0) + [0] + [1] + ... + [n - 1] - n * [n - 1]
+递推公式： F (k) = F(k - 1) + sum - n * [n - k]
+
+*/
+
+func maxRotateFunction(nums []int) int {
+	result, sum, temp := 0, 0, 0
+	for i := 0; i < len(nums); i++ {
+		sum += nums[i]
+		temp += i * nums[i]
+		result = temp
+	}
+	for i := 1; i < len(nums); i++ {
+		temp = temp + sum - len(nums)*nums[len(nums)-i]
+		if temp > result {
+			result = temp
+		}
+	}
+	return result
+}
