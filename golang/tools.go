@@ -32,7 +32,7 @@ func abs(i int) int {
 func swap(s string, i, j int) string {
 	if i > j {
 		return s[0:j] + string(s[i]) + s[j+1:i] + string(s[j]) + s[i+1:len(s)]
-	} else if i < j {
+	} else if i < j  {
 		return s[0:i] + string(s[j]) + s[i+1:j] + string(s[i]) + s[j+1:len(s)]
 	} else {
 		return s

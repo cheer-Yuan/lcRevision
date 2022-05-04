@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	//string1 := []string{" ", " ", "a", "b", "c", " ", " ", "d", " ", " "}
@@ -102,15 +104,15 @@ func main() {
 	//fmt.Println(trunc(12345.515313))
 
 	//TreeInverse
-	a21 := TreeNode{21, nil, nil}
-	a11 := TreeNode{11, nil, nil}
-	a12 := TreeNode{12, nil, nil}
-	a1 := TreeNode{1, &a11, &a12}
-	a2 := TreeNode{2, &a21, nil}
-	a := TreeNode{
-		0,
-		&a1,
-		&a2}
+	//a21 := TreeNode{21, nil, nil}
+	//a11 := TreeNode{11, nil, nil}
+	//a12 := TreeNode{12, nil, nil}
+	//a1 := TreeNode{1, &a11, &a12}
+	//a2 := TreeNode{2, &a21, nil}
+	//a := TreeNode{
+	//	0,
+	//	&a1,
+	//	&a2}
 	//b := invertTreeIter(&a)
 	//fmt.Println(b.Right.Right)
 
@@ -121,10 +123,14 @@ func main() {
 	//fmt.Println(A1.Next.Val)
 
 	// delete node
-	fmt.Println(a)
+	//fmt.Println(a)
 	//
 	//TIME := "13:45"
 	//fmt.Println( int(TIME[0] - '0'))
 
 	//fmt.Println(matPower(2, 3, [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}))
+
+	strA := "abcdefgh"
+	strb := strA[:3] + strA[6:9]
+	fmt.Println(strb)
 }
