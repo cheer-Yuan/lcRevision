@@ -894,3 +894,182 @@ func findTheWinner(n int, k int) int {
 	return result + 1
 }
 
+
+/*乘积小于 K 的子数组
+给你一个整数数组 nums 和一个整数 k ，请你返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目。
+
+输入：nums = [10,5,2,6], k = 100
+输出：8
+解释：8 个乘积小于 100 的子数组分别为：[10]、[5]、[2],、[6]、[10,5]、[5,2]、[2,6]、[5,2,6]。
+需要注意的是 [10,5,2] 并不是乘积小于 100 的子数组。
+
+滑动窗口, 记录以每个数字为右边界所形成的有效子数组的个数
+
+
+*/
+func numSubarrayProductLessThanK(nums []int, k int) int {
+	if k == 0 {
+		return 0
+	}
+
+	i, j, prod, result := 0, 0, 1, 0
+	for j < len(nums) {
+
+		prod *= nums[j]
+		for prod >= k && i < j {
+			prod /= nums[i]
+			i++
+		}
+		result += j - i + 1
+
+		j++
+	}
+
+	return result
+}
+
+
+/*最近的请求次数
+写一个RecentCounter类来计算特定时间范围内最近的请求。
+请你实现 RecentCounter 类：
+RecentCounter() 初始化计数器，请求数为 0 。
+int ping(int t) 在时间 t 添加一个新请求，其中 t 表示以毫秒为单位的某个时间，并返回过去 3000 毫秒内发生的所有请求数（包括新请求）。确切地说，返回在 [t-3000, t] 内发生的请求数。
+保证 每次对 ping 的调用都使用比之前更大的 t 值。
+
+输入：
+["RecentCounter", "ping", "ping", "ping", "ping"]
+[[], [1], [100], [3001], [3002]]
+输出：
+[null, 1, 2, 3, 3]
+解释：
+RecentCounter recentCounter = new RecentCounter();
+recentCounter.ping(1);     // requests = [1]，范围是 [-2999,1]，返回 1
+recentCounter.ping(100);   // requests = [1, 100]，范围是 [-2900,100]，返回 2
+recentCounter.ping(3001);  // requests = [1, 100, 3001]，范围是 [1,3001]，返回 3
+recentCounter.ping(3002);  // requests = [1, 100, 3001, 3002]，范围是 [2,3002]，返回 3
+*/
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * obj := Constructor();
+ * param_1 := obj.Ping(t);
+ */
+
+type RecentCounter []int
+
+//func Constructor() (_ RecentCounter) {
+//	return
+//}
+
+func (this *RecentCounter) Ping(t int) int {		// ping : 收到一个请求。在每次收到请求的时候都要返回三秒内的请求数
+	*this = append(*this, t)						// 入队列
+	for (*this)[0] < t - 3000 {
+		*this = (*this)[1:]
+	}
+
+	return len(*this)
+}
+
+
+/*最小基因变化
+基因序列可以示为一条由 8 个字符组成的字符串，其中每个字符都是 'A'、'C'、'G' 和 'T' 之一。
+假设我们需要调查从基因序列start 变为 end 所发生的基因变化。一次基因变化就意味着这个基因序列中的一个字符发生了变化。
+例如，"AACCGGTT" --> "AACCGGTA" 就是一次基因变化。
+另有一个基因库 bank 记录了所有有效的基因变化，只有基因库中的基因才是有效的基因序列。
+给你两个基因序列 start 和 end ，以及一个基因库 bank ，请你找出并返回能够使start 变化为 end 所需的最少变化次数。如果无法完成此基因变化，返回 -1 。
+注意：起始基因序start 默认是有效的，但是它并不一定会出现在基因库中。
+
+
+示例 1：
+
+输入：start = "AACCGGTT", end = "AACCGGTA", bank = ["AACCGGTA"]
+输出：1
+示例 2：
+
+输入：start = "AACCGGTT", end = "AAACGGTA", bank = ["AACCGGTA","AACCGCTA","AAACGGTA"]
+输出：2
+示例 3：
+
+输入：start = "AAAAACCC", end = "AACCCCCC", bank = ["AAAACCCC","AAACCCCC","AACCCCCC"]
+输出：3
+
+提示：
+start.length == 8
+end.length == 8
+0 <= bank.length <= 10
+bank[i].length == 8
+start、end 和 bank[i] 仅由字符 ['A', 'C', 'G', 'T'] 组成
+
+
+广度优先搜索：
+
+*/
+func minMutation(start string, end string, bank []string) int {
+
+}
+
+
+/*数组中重复的数据
+给你一个长度为 n 的整数数组 nums ，其中 nums 的所有整数都在范围 [1, n] 内，且每个整数出现 一次 或 两次 。请你找出所有出现 两次 的整数，并以数组形式返回。
+你必须设计并实现一个时间复杂度为 O(n) 且仅使用常量额外空间的算法解决此问题。
+
+输入：nums = [4,3,2,7,8,2,3,1]
+输出：[2,3]
+
+use the index of original list to simulate a hash map
+nums 的所有整数都在范围 [1, n] 内，且每个整数出现 一次 或 两次 : mark some opposite value
+*/
+func findDuplicates(nums []int) []int {
+	result := []int{}
+	temp := 0
+
+
+	for i := 0; i < len(nums); i++ {
+		if nums[i] < 0 {
+			temp = -nums[i]
+		} else {
+			temp = nums[i]
+		}
+
+		if nums[temp - 1] < 0 {
+			result = append(result, temp)
+		}
+		nums[temp - 1] = -nums[temp - 1]
+	}
+	return result
+}
+
+
+/*
+由范围 [0,n] 内所有整数组成的 n + 1 个整数的排列序列可以表示为长度为 n 的字符串 s ，其中:
+如果perm[i] < perm[i + 1]，那么s[i] == 'I'
+如果perm[i] > perm[i + 1]，那么 s[i] == 'D'
+给定一个字符串 s ，重构排列perm 并返回它。如果有多个有效排列perm，则返回其中 任何一个 。
+
+示例 1：
+输入：s = "IDID"
+输出：[0,4,1,3,2]
+*/
+func diStringMatch(s string) []int {
+	left, right := 0, len(s)
+	result := []int{}
+	for indexStr := 0; indexStr < len(s); indexStr++ {
+		if s[indexStr] == 'I' {
+			result = append(result, left)
+			left++
+		} else {
+			result = append(result, right)
+			right--
+		}
+	}
+	result = append(result)
+
+	if result[len(s) - 1] == left {
+		result = append(result, right)
+	} else {
+		result = append(result, left)
+	}
+
+	return result
+}
+
+
