@@ -1,9 +1,15 @@
 package main
 
 import (
+	"database/sql/driver"
 	"fmt"
+	"go/ast"
+	"go/constant"
+	"math"
 	"math/rand"
 	"sort"
+	"strconv"
+	"strings"
 )
 
 /*539. 最小时间差
@@ -1073,3 +1079,221 @@ func diStringMatch(s string) []int {
 }
 
 
+/*
+序列化是将数据结构或对象转换为一系列位的过程，以便它可以存储在文件或内存缓冲区中，或通过网络连接链路传输，以便稍后在同一个或另一个计算机环境中重建。
+设计一个算法来序列化和反序列化 二叉搜索树 。 对序列化/反序列化算法的工作方式没有限制。 您只需确保二叉搜索树可以序列化为字符串，并且可以将该字符串反序列化为最初的二叉搜索树。
+编码的字符串应尽可能紧凑。
+
+示例 1：
+输入：root = [2,1,3]
+输出：[2,1,3]
+示例 2：
+输入：root = []
+输出：[]
+
+提示：
+树中节点数范围是 [0, 104]
+0 <= Node.val <= 104
+题目数据 保证 输入的树是一棵二叉搜索树。
+
+思路
+仅对二叉搜索树做「先序遍历」或者「后序遍历」，即可达到序列化和反序列化的要求。
+后序遍历得到的数组中，根结点的值位于数组末尾，左子树的节点均小于根节点的值，右子树的节点均大于根节点的值，可以根据这些性质设计递归函数恢复二叉搜索树。
+*/
+
+type Codec struct {
+
+}
+
+//func Constructor() (_ Codec) {
+//	return
+//}
+
+// Serializes a tree to a single string.
+func (this *Codec) serialize(root *TreeNode) string {
+	postR := []string{}
+
+	var traverseMid func(*TreeNode)
+	traverseMid = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+
+		traverseMid(node.Left)
+		traverseMid(node.Right)
+		postR = append(postR, strconv.Itoa(node.Val))
+	}
+
+	traverseMid(root)
+	return strings.Join(postR, " ")
+}
+
+// Deserializes your encoded data to tree.
+func (this *Codec) deserialize(data string) *TreeNode {
+	if data == "" {
+		return nil
+	}
+	sep := strings.Split(data, " ")
+
+	var construct func(int, int) *TreeNode
+	construct = func(lower int, upper int) *TreeNode {
+		if len(sep) == 0 {
+			return nil			// return when all seperated values removed
+		}
+
+		val, _ := strconv.Atoi(sep[len(sep) - 1])
+		if val < lower || val > upper {			// leaf node, return nil for its leaves`
+			return nil
+		}
+		sep = sep[:len(sep) - 1]				// remove the processed node
+
+		return &TreeNode{Val: val, Right: construct(val, upper), Left: construct(lower, val)}
+	}
+
+	return construct(math.MinInt32, math.MaxInt32)
+}
+
+
+/*一次编辑
+字符串有三种编辑操作:插入一个字符、删除一个字符或者替换一个字符。 给定两个字符串，编写一个函数判定它们是否只需要一次(或者零次)编辑。
+
+输入:
+first = "pale"
+second = "ple"
+输出: True
+
+输入:
+first = "pales"
+second = "pal"
+输出: False
+*/
+func oneEditAway(first string, second string) bool {
+	if first == second {
+		return true
+	}
+
+	len1, len2 := len(first), len(second)
+	if len1 + 1 < len2 || len2 + 1 < len1 {
+		return false
+	}
+
+	var length int
+	if len1 < len2 {
+		length = len1
+	} else {
+		length = len2
+	}
+
+	if length == 0 {
+		return true
+	}
+
+	used := false
+	for i := 0; i < length; i++ {
+		if first[i] != second[i] {
+			if used {
+				return false
+			}
+
+			if len1 < len2 {
+				second = second[:i] + second[i + 1:]
+				i--
+			} else if len1 > len2 {
+				first = first[:i] + first[i + 1:]
+			}
+
+			used = true
+		}
+	}
+
+	return true
+}
+
+
+/*贴纸拼词
+我们有 n 种不同的贴纸。每个贴纸上都有一个小写的英文单词。
+您想要拼写出给定的字符串 target，方法是从收集的贴纸中切割单个字母并重新排列它们。如果你愿意，你可以多次使用每个贴纸，每个贴纸的数量是无限的。
+返回你需要拼出 target的最小贴纸数量。如果任务不可能，则返回 -1 。
+注意：在所有的测试用例中，所有的单词都是从 1000 个最常见的美国英语单词中随机选择的，并且 target 被选择为两个随机单词的连接。
+
+示例 1：
+输入： stickers = ["with","example","science"], target = "thehat"
+输出：3
+解释：
+我们可以使用 2 个 "with" 贴纸，和 1 个 "example" 贴纸。
+把贴纸上的字母剪下来并重新排列后，就可以形成目标 “thehat“ 了。
+此外，这是形成目标字符串所需的最小贴纸数量。
+
+记忆化搜索 + 状态压缩
+target有2^m个子序列，dp(子序列)为所需的最小贴纸数。对于某一子序列：使用交集遍历挑选最优的sticker，未被覆盖的其他字符用dp继续计算。
+用二进制数来表示某一子序列。
+*/
+func minStickers(stickers []string, target string) int {
+	length := len(target)
+
+	masks := make([]int, 1 << length) 		// 2 ^ n, 长度等于子序列数量
+	for i := range masks {
+		masks[i] = -1
+	}
+	masks[0]	= 0
+
+	var dp func(int) int
+	dp = func(mask int) int {				// dp函数的作用是，输入mask：还需要解决哪些状态，返回：最少需要的卡片数
+		if masks[mask] != -1 {					// 如果没有需要解决的状态，就不需要卡片，那么直接return 0
+			return masks[mask]
+		}
+		masks[mask] = length + 1				// 不会需要length+1张卡片，把这个设置为初始最大值
+
+		for _, sticker := range stickers {		// 对于每一个贴纸
+			left := mask
+			count := [26]int{}
+			for _, caracter := range sticker {			// 对于某个贴纸里的每一个字母
+				count[caracter - 'a']++					// 用列表统计该贴纸的每个字母数量
+			}
+			for index, caracter := range target {	// 对于目标单词
+				if mask >> index & 1 == 1 && count[caracter - 'a'] > 0 {	// 如果第i位恰好没解决，且第i位的字母，卡片sticker还有，
+					count[caracter - 'a']--										// 那么就把sticker的这个字母减下来，然后把然后把这一位解决掉
+					left ^= 1 << index
+				}
+			}
+			if left < mask {
+				masks[mask] = MinOf2(masks[mask], dp(left)+1)
+			}
+		}
+		return masks[mask]
+	}
+
+	ans := dp(1 << length - 1)
+	if ans <= length {
+		return ans
+	}
+	return -1
+}
+
+
+/*最大三角形面积
+给定包含多个点的集合，从其中取三个点组成三角形，返回能组成的最大三角形的面积。
+
+示例:
+输入: points = [[0,0],[0,1],[1,0],[0,2],[2,0]]
+输出: 2
+
+凸包：
+
+*/
+func largestTriangleArea(points [][]int) float64 {
+
+}
+
+
+func isAlienSorted(words []string, order string) bool {
+	for i := 0; i < len(words); i++ {
+		for j := 0; j < MinOf2(len(words[i]), len(words[i - 1])); j++ {
+			if words[i][j] > words[i - 1][j] {
+				break
+			} else if  {
+				
+			}
+		}
+	}
+}
