@@ -1286,14 +1286,104 @@ func largestTriangleArea(points [][]int) float64 {
 }
 
 
-func isAlienSorted(words []string, order string) bool {
-	for i := 0; i < len(words); i++ {
-		for j := 0; j < MinOf2(len(words[i]), len(words[i - 1])); j++ {
-			if words[i][j] > words[i - 1][j] {
-				break
-			} else if  {
-				
-			}
+/*乘法表中第k小的数
+给定高度m 、宽度n 的一张 m * n的乘法表，以及正整数k，你需要返回表中第k 小的数字。
+
+矩阵的二分查找
+对于乘法表的第i行: i, 2i, 3i ... ni， 不超过x的数有min( floor(x/i), n)个，整个乘法表不超过x的数为：sum( min(...) )
+i < floor(x/n) 时， floor(x/i) > n
+*/
+func findKthNumber(m int, n int, k int) int {
+	left, right := 1, m * n		// 二分查找的左右边界
+	for left < right {
+		x := left + (right - left) / 2	// 二分的中点
+		sum := x / n * n				// sum 的前n部分
+		for i := x / n + 1; i < m; i++ {
+			sum += x / i
+		}
+		if sum >= k {					// 不超过x的数的数量大于等于k：向左移动右边界
+			right = x
+		} else {						// 否则移动左边界
+			left = x + 1
 		}
 	}
+	return left
 }
+
+
+/*最少移动次数使数组元素相等 II
+给你一个长度为 n 的整数数组 nums ，返回使所有数组元素相等需要的最少移动数。在一步操作中，你可以使数组中的一个元素加 1 或者减 1 。
+
+示例 1：
+输入：nums = [1,2,3]
+输出：2
+解释：
+只需要两步操作（每步操作指南使一个元素加 1 或减 1）：
+[1,2,3]  =>  [2,2,3]  =>  [2,2,2]
+
+取排列后的数组的中位数
+*/
+func minMoves2(nums []int) int {
+	sort.Ints(nums)
+	n := nums[len(nums) / 2]
+
+	result := 0
+	for _, i := range nums {
+		if i < n {
+			result = result + n - i
+		} else {
+			result = result + i - n
+		}
+	}
+
+	return result
+}
+
+
+/*
+给你一个区间数组 intervals ，其中intervals[i] = [starti, endi] ，且每个starti 都 不同 。区间 i 的 右侧区间 可以记作区间 j ，并满足 startj>= endi ，且 startj 最小化 。
+返回一个由每个区间 i 的 右侧区间 的最小起始位置组成的数组。如果某个区间 i 不存在对应的 右侧区间 ，则下标 i 处的值设为 -1 。
+
+输入：intervals = [[3,4],[2,3],[1,2]]
+输出：[-1,0,1]
+解释：对于 [3,4] ，没有满足条件的“右侧”区间。
+对于 [2,3] ，区间[3,4]具有最小的“右”起点;
+对于 [1,2] ，区间[2,3]具有最小的“右”起点。
+
+1 <=intervals.length <= 2 * 104
+intervals[i].length == 2
+-106 <= starti <= endi <= 106
+每个间隔的起点都不相同
+*/
+func findRightInterval(intervals [][]int) []int {
+	n := len(intervals)
+	type pair struct{value, index int}
+	start, end := make([]pair, n), make([]pair, n)		// 起始点and结束点从小到大排序
+	for index, i := range intervals {					// 问题转化为求两个有序数组start和end。对end中每个元素找start中最小的大于它的值
+		start[index] = pair{i[0], index}
+		end[index] = pair{i[1], index}
+	}
+
+	sort.Slice(start, func(i, j int) bool {				// 根据第一个元素排序
+		return start[i].value < start[j].value
+	})
+	sort.Slice(end, func(i, j int) bool {
+		return end[i].value < end[j].value
+	})
+
+	result := make([]int, n)
+	j := 0												// 已排序，每次直接从j开始比较
+	for _, e := range end {
+		for j < n && start[j].value < e.value {
+			j++
+		}
+		if j < n {
+			result[e.index] = start[j].index
+		} else {
+			result[e.index] = -1
+		}
+	}
+
+	return result
+}
+
