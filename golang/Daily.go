@@ -1387,3 +1387,245 @@ func findRightInterval(intervals [][]int) []int {
 	return result
 }
 
+/*单值二叉树
+如果二叉树每个节点都具有相同的值，那么该二叉树就是单值二叉树。
+只有给定的树是单值二叉树时，才返回 true；否则返回 false。
+*/
+func isUnivalTree(root *TreeNode) bool {
+	return root == nil || (root.Left == nil || root.Val == root.Left.Val && isUnivalTree(root.Left)) && (root.Right == nil || root.Val == root.Right.Val && isUnivalTree(root.Right))
+}
+
+
+/*
+在无限长的数轴（即 x 轴）上，我们根据给定的顺序放置对应的正方形方块。
+第 i 个掉落的方块（positions[i] = (left, side_length)）是正方形，其中left 表示该方块最左边的点位置(positions[i][0])，side_length 表示该方块的边长(positions[i][1])。
+每个方块的底部边缘平行于数轴（即 x 轴），并且从一个比目前所有的落地方块更高的高度掉落而下。在上一个方块结束掉落，并保持静止后，才开始掉落新方块。
+方块的底边具有非常大的粘性，并将保持固定在它们所接触的任何长度表面上（无论是数轴还是其他方块）。邻接掉落的边不会过早地粘合在一起，因为只有底边才具有粘性。
+返回一个堆叠高度列表ans 。每一个堆叠高度ans[i]表示在通过positions[0], positions[1], ..., positions[i]表示的方块掉落结束后，目前所有已经落稳的方块堆叠的最高高度。
+
+
+示例 1:
+输入: [[1, 2], [2, 3], [6, 1]]
+输出: [2, 5, 5]
+解释:
+
+第一个方块 positions[0] = [1, 2] 掉落：
+_aa
+_aa
+-------
+方块最大高度为 2 。
+
+第二个方块 positions[1] = [2, 3] 掉落：
+__aaa
+__aaa
+__aaa
+_aa__
+_aa__
+--------------
+方块最大高度为5。
+大的方块保持在较小的方块的顶部，不论它的重心在哪里，因为方块的底部边缘有非常大的粘性。
+
+第三个方块 positions[1] = [6, 1] 掉落：
+__aaa
+__aaa
+__aaa
+_aa
+_aa___a
+--------------
+方块最大高度为5。
+因此，我们返回结果[2, 5, 5]。
+
+示例 2:
+输入: [[100, 100], [200, 100]]
+输出: [100, 100]
+解释: 相邻的方块不会过早地卡住，只有它们的底部边缘才能粘在表面上。
+
+使用map一对一地记录高度会超时，更改定义：hights[x]表明从x开始的点的高度
+*/
+func fallingSquares(positions [][]int) []int {
+	length := len(positions)
+
+	result := []int{}
+	mapHeight := map[int]int{}
+	mapHeight
+	topAll := 0
+	for index, cube := range positions {
+		top := 0
+		for length := cube[0]; length < cube[0] + cube[1]; length++ {
+			if mapHeight[length] > top {
+				top = mapHeight[length]
+			}
+		}
+		for length := cube[0]; length < cube[0] + cube[1]; length++ {
+			mapHeight[length] = top + cube[1]
+		}
+		if top + cube[1] > topAll {
+			topAll = top + cube[1]
+		}
+		result = append(result, topAll)
+	}
+
+	return result
+}
+
+
+/*单词距离
+有个内含单词的超大文本文件，给定任意两个不同的单词，找出在这个文件中这两个单词的最短距离(相隔单词数)。如果寻找过程在这个文件中会重复多次，而每次寻找的单词不同，你能对此优化吗?
+
+示例：
+输入：words = ["I","am","a","student","from","a","university","in","a","city"], word1 = "a", word2 = "student"
+输出：1
+
+目标：一次遍历
+*/
+func findClosest(words []string, word1 string, word2 string) int {
+	index1, index2 := -1, -1			// 适配首位有/没有目标单词之一
+
+	result := len(words)
+	for index, i := range words {
+		if i == word1 {
+			index1 = index
+		} else if i == word2 {
+			index2 = index
+		}
+		if index1 != index2 && index1 >= 0 && index2 >= 0{
+			dist := index1 - index2
+			if dist < 0 {
+				dist = - dist
+			}
+			if dist < result {
+				result = dist
+			}
+		}
+	}
+
+	return result
+}
+
+
+/*
+有效括号字符串为空 ""、"(" + A + ")"或A + B ，其中A 和B都是有效的括号字符串，+代表字符串的连接。
+例如，""，"()"，"(())()"和"(()(()))"都是有效的括号字符串。
+如果有效字符串 s 非空，且不存在将其拆分为 s = A + B的方法，我们称其为原语（primitive），其中A 和B都是非空有效括号字符串。
+给出一个非空有效字符串 s，考虑将其进行原语化分解，使得：s = P_1 + P_2 + ... + P_k，其中P_i是有效括号字符串原语。
+对 s 进行原语化分解，删除分解中每个原语字符串的最外层括号，返回 s 。
+
+示例 1：
+输入：s = "(()())(())"
+输出："()()()"
+解释：
+输入字符串为 "(()())(())"，原语化分解得到 "(()())" + "(())"，
+删除每个部分中的最外层括号后得到 "()()" + "()" = "()()()"。
+
+示例 2：
+输入：s = "(()())(())(()(()))"
+输出："()()()()(())"
+解释：
+输入字符串为 "(()())(())(()(()))"，原语化分解得到 "(()())" + "(())" + "(()(()))"，
+删除每个部分中的最外层括号后得到 "()()" + "()" + "()(())" = "()()()()(())"。
+
+示例 3
+输入：s = "()()"
+输出：""
+解释：
+输入字符串为 "()()"，原语化分解得到 "()" + "()"，
+删除每个部分中的最外层括号后得到 "" + "" = ""。
+
+提示：
+1 <= s.length <= 105
+s[i] 为 '(' 或 ')'
+s 是一个有效括号字符串
+*/
+func removeOuterParentheses(s string) string {
+	length := len(s)
+
+	numP := 0
+	result := ""
+	for i := 0; i < length; i++ {
+
+		if s[i] == '(' {
+
+			numP++
+			if numP == 1 {
+				continue
+			}
+		} else {
+			numP--
+			if numP == 0 {
+				continue
+			}
+		}
+
+		result += string(s[i])
+
+	}
+
+	return result
+}
+
+
+/*
+给定一个字符串queryIP。如果是有效的 IPv4 地址，返回 "IPv4" ；如果是有效的 IPv6 地址，返回 "IPv6" ；如果不是上述类型的 IP 地址，返回 "Neither" 。
+有效的IPv4地址 是 “x1.x2.x3.x4” 形式的IP地址。 其中0 <= xi<= 255且xi不能包含 前导零。例如:“192.168.1.1”、 “192.168.1.0” 为有效IPv4地址， “192.168.01.1” 为无效IPv4地址; “192.168.1.00” 、 “192.168@1.1” 为无效IPv4地址。
+一个有效的IPv6地址是一个格式为“x1:x2:x3:x4:x5:x6:x7:x8” 的IP地址，其中:
+
+1 <= xi.length <= 4
+xi是一个 十六进制字符串 ，可以包含数字、小写英文字母( 'a' 到 'f' )和大写英文字母( 'A' 到 'F' )。
+在xi中允许前导零。
+例如 "2001:0db8:85a3:0000:0000:8a2e:0370:7334" 和 "2001:db8:85a3:0:0:8A2E:0370:7334" 是有效的 IPv6 地址，而 "2001:0db8:85a3::8A2E:037j:7334" 和 "02001:0db8:85a3:0000:0000:8a2e:0370:7334" 是无效的 IPv6 地址。
+
+示例 1：
+输入：queryIP = "172.16.254.1"
+输出："IPv4"
+解释：有效的 IPv4 地址，返回 "IPv4"
+
+示例 2：
+输入：queryIP = "2001:0db8:85a3:0:0:8A2E:0370:7334"
+输出："IPv6"
+解释：有效的 IPv6 地址，返回 "IPv6"
+
+示例 3：
+输入：queryIP = "256.256.256.256"
+输出："Neither"
+解释：既不是 IPv4 地址，又不是 IPv6 地址
+*/
+func validIPAddress(queryIP string) string {
+	pieces := strings.Split(queryIP, ".")
+	if len(pieces) == 4 {
+		for _, thisStr := range pieces {
+			if len(thisStr) == 0 {
+				return "Neither"
+			}
+			convert, err := strconv.Atoi(thisStr)
+			if err == nil {
+				if len(thisStr) == len(strconv.Itoa(convert)) && convert <= 255 {
+					continue
+				}
+			}
+			return "Neither"
+		}
+		return "IPv4"
+	}
+
+	pieces = strings.Split(queryIP, ":")
+	if len(pieces) == 8 {
+		for _, thisStr := range pieces {
+			if len(thisStr) == 0 {
+				return "Neither"
+			}
+			if len(thisStr) <= 4 {
+				for i := 0; i < len(thisStr); i++ {
+					if thisStr[i] >= 48 && thisStr[i] <= 57 || thisStr[i] >= 97 && thisStr[i] <= 102 || thisStr[i] >= 65 && thisStr[i] <= 70 {
+						continue
+					}
+					return "Neither"
+				}
+			} else {
+				return "Neither"
+			}
+		}
+		return "IPv6"
+	}
+
+	return "Neither"
+}

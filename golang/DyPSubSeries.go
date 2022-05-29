@@ -285,3 +285,50 @@ func wordBreak(s string, wordDict []string) bool {
 
 	return dp[leng]
 }
+
+
+/*环绕字符串中唯一的子字符串
+把字符串 s 看作是“abcdefghijklmnopqrstuvwxyz”的无限环绕字符串，所以s 看起来是这样的：
+"...zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd....".
+现在给定另一个字符串 p 。返回s 中唯一 的 p 的 非空子串的数量。
+
+输入: p = "a"
+输出: 1
+解释: 字符串 s 中只有一个"a"子字符。
+
+输入: p = "cac"
+输出: 2
+解释: 字符串 s 中的字符串“cac”只有两个子串“a”、“c”。.
+
+输入: p = "zab"
+输出: 6
+解释: 在字符串 s 中有六个子串“z”、“a”、“b”、“za”、“ab”、“zab”。
+
+思路： 周期字符串，首字母+长度->确定子串。
+定义dp[a]：p中含有的以a结尾的最长子串长度
+*/
+func findSubstringInWraproundString(p string) int {
+	dp := [26]int{}
+	k := 0
+	for i, ch := range p {
+		if i > 0 && (byte(ch)-p[i-1]+26)%26 == 1 { 		// 从第i位开始寻找以它开头的连续字符串
+			k++
+		} else {
+			k = 1										// 不是连续字符串
+		}
+		dp[ch-'a'] = max(dp[ch-'a'], k)					// 记录较大值
+	}
+
+	result := 0
+	for _, v := range dp {
+		result += v
+	}
+	return result
+}
+
+func max(a, b int) int {
+	if b > a {
+		return b
+	}
+	return a
+}
