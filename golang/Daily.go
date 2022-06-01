@@ -1629,3 +1629,60 @@ func validIPAddress(queryIP string) string {
 
 	return "Neither"
 }
+
+
+/*从根到叶的二进制数之和
+给出一棵二叉树，其上每个结点的值都是0或1。每一条从根到叶的路径都代表一个从最高有效位开始的二进制数。
+例如，如果路径为0 -> 1 -> 1 -> 0 -> 1，那么它表示二进制数01101，也就是13。
+对树上的每一片叶子，我们都要找出从根到该叶子的路径所表示的数字。
+返回这些数字之和。题目数据保证答案是一个 32 位 整数。
+
+后序遍历的访问顺序为：左子树——右子树——根节点。我们对根节点 root 进行后序遍历：
+如果节点是叶子节点，返回它对应的数字 val。
+如果节点是非叶子节点，返回它的左子树和右子树对应的结果之和。
+*/
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func sumRootToLeaf(root *TreeNode) int {
+	var dfs func(node *TreeNode, val int) int
+	dfs = func(node *TreeNode, val int) int {		// 有返回值，使用有序遍历
+		if node == nil {							// 空节点：返回零
+			return 0
+		}
+
+		val = val << 1 | node.Val					// 左移1位 ：增加一个二进制数后的进位变化。对此数按位取或：若等于1则+1
+
+		if node.Left == nil && node.Right == nil {	// 空节点：返回
+			return val
+		}
+
+		return dfs(node.Left, val) + dfs(node.Right, val) // 实际上是后序遍历
+	}
+
+	return dfs(root, 0)
+}
+
+
+/*外星文字典
+现有一种使用英语字母的外星文语言，这门语言的字母顺序与英语顺序不同。
+给定一个字符串列表 words ，作为这门语言的词典，words 中的字符串已经 按这门新语言的字母顺序进行了排序 。
+请你根据该词典还原出此语言中已知的字母顺序，并 按字母递增顺序 排列。若不存在合法字母顺序，返回 "" 。若存在多种可能的合法字母顺序，返回其中 任意一种 顺序即可。
+
+字符串 s 字典顺序小于 字符串 t 有两种情况：
+在第一个不同字母处，如果 s 中的字母在这门外星语言的字母顺序中位于 t 中字母之前，那么s 的字典顺序小于 t 。
+如果前面 min(s.length, t.length) 字母都相同，那么 s.length < t.length 时，s 的字典顺序也小于 t 。
+*/
+func alienOrder(words []string) string {
+
+}
+
+
+/*
+
+*/
