@@ -8,12 +8,10 @@ using namespace std;
 #include <numeric>     // accumulate 函数
 /*
 accumulate函数进行自定义求和：
-
 struct Grade {
     string Name;
     int note;
 };
-
 int main() {
     Grade subjects[3] = {
             {"Eng", 10},
@@ -25,9 +23,8 @@ int main() {
     cout << sum << endl;
 }
 */
+
 #include <algorithm>   // sort 函数
-
-
 #include <string>
 #include <iostream>
 
@@ -38,11 +35,27 @@ int main() {
 */
 class Solution {
 public:
+    bool dfs(vector<int> &edges, vector<int> &matchsticks, int totalLen, int iMatch) {
+        if (iMatch == matchsticks.size()) {
+            return true;
+        }
 
-    bool makesquare(vector<int>& matchsticks) {
+        for (int i = 0; i < edges.size(); ++i) {
+            edges[i] += matchsticks[iMatch];
+            if (edges[i] <= totalLen && dfs(edges, matchsticks, totalLen, iMatch + 1)) return true;
+            edges[i] -= matchsticks[iMatch];
+        }
+
+        return false;
+    }
+
+    bool makesquare(vector<int> &matchsticks) {
         int totalLen = accumulate(matchsticks.begin(), matchsticks.end(), 0);
         if (totalLen % 4 != 0) return false;
-        sor
+        sort(matchsticks.begin(), matchsticks.end(), greater<>());       // 从大到小排序
+
+        vector<int> edges(4);
+        return dfs(edges, matchsticks, totalLen / 4, 0);
     }
 };
 

@@ -12,8 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8f2d3cc-35fa-4083-b6e2-c7c19527e866" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../golang/Daily.go" beforeDir="false" afterPath="$PROJECT_DIR$/../golang/Daily.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../golang/Recursive.go" beforeDir="false" afterPath="$PROJECT_DIR$/../golang/Recursive.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dfs.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dfs.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +69,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1654045164887</updated>
-      <workItem from="1654045169028" duration="3278000" />
+      <workItem from="1654045169028" duration="9288000" />
     </task>
     <servers />
   </component>
