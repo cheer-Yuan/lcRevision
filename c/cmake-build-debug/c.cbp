@@ -82,10 +82,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/Study/lcRevision/c/algebra.cpp">
+			<Option target="c"/>
+		</Unit>
 		<Unit filename="D:/Study/lcRevision/c/dfs.cpp">
 			<Option target="c"/>
 		</Unit>
 		<Unit filename="D:/Study/lcRevision/c/main.cpp">
+			<Option target="c"/>
+		</Unit>
+		<Unit filename="D:/Study/lcRevision/c/recursive.cpp">
 			<Option target="c"/>
 		</Unit>
 		<Unit filename="D:/Study/lcRevision/c/CMakeLists.txt">

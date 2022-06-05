@@ -84,13 +84,13 @@ solution.pick(1);
 遍历nums，当我们第 i 次遇到值为target 的元素时，随机选择区间 [0,i) 内的一个整数，如果其等于 0，则将返回值置为该元素的下标，否则返回值不变。
 */
 
-type Solution []int
+type Solution1 []int
 
-func Constructor(nums []int) Solution {
+func Constructor1(nums []int) Solution1 {
 	return nums
 }
 
-func (this Solution) Pick(target int) int {
+func (this Solution1) Pick(target int) int {
 	count, result := 0, 0
 	for index, i := range this {
 		if i == target {
@@ -1683,6 +1683,104 @@ func alienOrder(words []string) string {
 }
 
 
+/*连续整数求和
+给定一个正整数 n，返回 连续正整数满足所有数字之和为 n 的组数 。
+
+输入: n = 15
+输出: 4
+解释: 15 = 8 + 7 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5
+
+思路：
+找2个连续数字：15 - 1 = 14, 14 % 2 = 0, 14 / 2 = 7, 15 = 7 + 8 = 7 + 7 + 1
+找3个连续数字：15 - 3 = 12, 12 % 3 = 0， 12 / 3 = 4 , 15 = 4 + 5 + 6 = 4 + 4 + 1 + 4 + 2
+找4个连续数字：15 - 6 = 9, 9 % 4 != 0, pass
+找5个连续数字：15 - 10 = 5, 5 mod 5 = 0, ...
+*/
+func consecutiveNumbersSum(n int) int {
+	result := 0
+
+
+}
+
+
 /*
+每个 有效电子邮件地址 都由一个 本地名 和一个 域名 组成，以 '@' 符号分隔。除小写字母之外，电子邮件地址还可以含有一个或多个'.' 或 '+' 。
+例如，在alice@leetcode.com中，alice是 本地名 ，而leetcode.com是 域名 。
+如果在电子邮件地址的 本地名 部分中的某些字符之间添加句点（'.'），则发往那里的邮件将会转发到本地名中没有点的同一地址。请注意，此规则 不适用于域名 。
+例如，"alice.z@leetcode.com” 和 “alicez@leetcode.com”会转发到同一电子邮件地址。
+如果在 本地名 中添加加号（'+'），则会忽略第一个加号后面的所有内容。这允许过滤某些电子邮件。同样，此规则 不适用于域名 。
+例如 m.y+name@email.com 将转发到 my@email.com。
+可以同时使用这两个规则。
+给你一个字符串数组 emails，我们会向每个 emails[i] 发送一封电子邮件。返回实际收到邮件的不同地址数目。
 
 */
+func numUniqueEmails(emails []string) int {
+	sentAdr := map[string]bool{}
+
+	result := 0
+	for _, addres := range emails {
+		thisAdr, parseLocal := "", true
+		for i := 0; i < len(addres); i++ {
+			if addres[i] == '@' {
+				thisAdr += addres[i:]
+				break
+			}
+			if parseLocal {
+				if addres[i] == '.' {
+					continue
+				}
+				if addres[i] == '+' {
+					parseLocal = false
+					continue
+				}
+				thisAdr += string(addres[i])
+			}
+		}
+		if sentAdr[thisAdr] == true {
+			continue
+		} else {
+			sentAdr[thisAdr] = true
+			result++
+		}
+	}
+
+	return result
+}
+
+
+/*
+给定圆的半径和圆心的位置，实现函数 randPoint ，在圆中产生均匀随机点。
+
+实现Solution类:
+Solution(double radius, double x_center, double y_center)用圆的半径radius和圆心的位置 (x_center, y_center) 初始化对象
+randPoint()返回圆内的一个随机点。圆周上的一点被认为在圆内。答案作为数组返回 [x, y] 。
+*/
+type Solution struct {
+	radius float64
+	x_center float64
+	y_center float64
+}
+
+
+func Constructor(radius float64, x_center float64, y_center float64) Solution {
+	return Solution{
+		radius: radius,
+		x_center: x_center,
+		y_center: y_center,
+	}
+}
+
+
+func (this *Solution) RandPoint() []float64 {
+	for {
+		x, y := rand.Float64() * 2 - 1, rand.Float64() * 2 - 1
+		if x * x + y * y < 1 {
+			return []float64{x * this.radius + this.x_center, y * this.radius + this.y_center}
+		}
+	}
+}
+/**
+ * Your Solution object will be instantiated and called as such:
+ * obj := Constructor(radius, x_center, y_center);
+ * param_1 := obj.RandPoint();
+ */

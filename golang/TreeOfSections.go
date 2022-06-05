@@ -28,19 +28,19 @@ myCalendar.book(20, 30); // return True ，这个日程安排可以添加到日�
 每个测试用例，调用 book 方法的次数最多不超过 1000 次。
 */
 
-type MyCalendar struct {
-	redbla
-}
-
-
-func Constructor() MyCalendar {
-
-}
-
-
-func (this *MyCalendar) Book(start int, end int) bool {
-
-}
+//type MyCalendar struct {
+//	redbla
+//}
+//
+//
+//func Constructor() MyCalendar {
+//
+//}
+//
+//
+//func (this *MyCalendar) Book(start int, end int) bool {
+//
+//}
 
 
 /**

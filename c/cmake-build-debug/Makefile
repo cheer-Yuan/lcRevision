@@ -126,6 +126,33 @@ c\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\build
 .PHONY : c\fast
 
+algebra.obj: algebra.cpp.obj
+
+.PHONY : algebra.obj
+
+# target to build an object file
+algebra.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\algebra.cpp.obj
+.PHONY : algebra.cpp.obj
+
+algebra.i: algebra.cpp.i
+
+.PHONY : algebra.i
+
+# target to preprocess a source file
+algebra.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\algebra.cpp.i
+.PHONY : algebra.cpp.i
+
+algebra.s: algebra.cpp.s
+
+.PHONY : algebra.s
+
+# target to generate assembly for a file
+algebra.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\algebra.cpp.s
+.PHONY : algebra.cpp.s
+
 dfs.obj: dfs.cpp.obj
 
 .PHONY : dfs.obj
@@ -180,6 +207,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\main.cpp.s
 .PHONY : main.cpp.s
 
+recursive.obj: recursive.cpp.obj
+
+.PHONY : recursive.obj
+
+# target to build an object file
+recursive.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\recursive.cpp.obj
+.PHONY : recursive.cpp.obj
+
+recursive.i: recursive.cpp.i
+
+.PHONY : recursive.i
+
+# target to preprocess a source file
+recursive.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\recursive.cpp.i
+.PHONY : recursive.cpp.i
+
+recursive.s: recursive.cpp.s
+
+.PHONY : recursive.s
+
+# target to generate assembly for a file
+recursive.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\recursive.cpp.s
+.PHONY : recursive.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -189,12 +243,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... c
+	@echo ... algebra.obj
+	@echo ... algebra.i
+	@echo ... algebra.s
 	@echo ... dfs.obj
 	@echo ... dfs.i
 	@echo ... dfs.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... recursive.obj
+	@echo ... recursive.i
+	@echo ... recursive.s
 .PHONY : help
 
 

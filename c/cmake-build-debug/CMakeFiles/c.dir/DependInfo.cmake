@@ -4,8 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "D:/Study/lcRevision/c/algebra.cpp" "D:/Study/lcRevision/c/cmake-build-debug/CMakeFiles/c.dir/algebra.cpp.obj"
   "D:/Study/lcRevision/c/dfs.cpp" "D:/Study/lcRevision/c/cmake-build-debug/CMakeFiles/c.dir/dfs.cpp.obj"
   "D:/Study/lcRevision/c/main.cpp" "D:/Study/lcRevision/c/cmake-build-debug/CMakeFiles/c.dir/main.cpp.obj"
+  "D:/Study/lcRevision/c/recursive.cpp" "D:/Study/lcRevision/c/cmake-build-debug/CMakeFiles/c.dir/recursive.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 
