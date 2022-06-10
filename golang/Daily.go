@@ -75,7 +75,7 @@ func findMinDifference(timePoints []string) int {
 数组大小可能非常大。 使用太多额外空间的解决方案将不会通过测试。
 
 int[] nums = new int[] {1,2,3,3,3};
-Solution solution = new Solution(nums);
+RandPointSolution solution = new RandPointSolution(nums);
 // pick(3) 应该返回索引 2,3 或者 4。每个索引的返回概率应该相等。
 solution.pick(3);
 // pick(1) 应该返回 0。因为只有nums[0]等于1。
@@ -1752,18 +1752,18 @@ func numUniqueEmails(emails []string) int {
 给定圆的半径和圆心的位置，实现函数 randPoint ，在圆中产生均匀随机点。
 
 实现Solution类:
-Solution(double radius, double x_center, double y_center)用圆的半径radius和圆心的位置 (x_center, y_center) 初始化对象
+RandPointSolution(double radius, double x_center, double y_center)用圆的半径radius和圆心的位置 (x_center, y_center) 初始化对象
 randPoint()返回圆内的一个随机点。圆周上的一点被认为在圆内。答案作为数组返回 [x, y] 。
 */
-type Solution struct {
+type RandPointSolution struct {
 	radius float64
 	x_center float64
 	y_center float64
 }
 
 
-func Constructor(radius float64, x_center float64, y_center float64) Solution {
-	return Solution{
+func RandPointConstructor(radius float64, x_center float64, y_center float64) RandPointSolution {
+	return RandPointSolution{
 		radius: radius,
 		x_center: x_center,
 		y_center: y_center,
@@ -1771,7 +1771,7 @@ func Constructor(radius float64, x_center float64, y_center float64) Solution {
 }
 
 
-func (this *Solution) RandPoint() []float64 {
+func (this *RandPointSolution) RandPoint() []float64 {
 	for {
 		x, y := rand.Float64() * 2 - 1, rand.Float64() * 2 - 1
 		if x * x + y * y < 1 {
@@ -1780,7 +1780,56 @@ func (this *Solution) RandPoint() []float64 {
 	}
 }
 /**
- * Your Solution object will be instantiated and called as such:
+ * Your RandPointSolution object will be instantiated and called as such:
  * obj := Constructor(radius, x_center, y_center);
  * param_1 := obj.RandPoint();
  */
+
+
+/*
+给定一个由非重叠的轴对齐矩形的数组 rects ，其中 rects[i] = [ai, bi, xi, yi] 表示 (ai, bi) 是第 i 个矩形的左下角点，(xi, yi) 是第 i 个矩形的右上角角点。设计一个算法来随机挑选一个被某一矩形覆盖的整数点。矩形周长上的点也算做是被矩形覆盖。所有满足要求的点必须等概率被返回。
+在一个给定的矩形覆盖的空间内任何整数点都有可能被返回。
+请注意，整数点是具有整数坐标的点。
+
+实现Solution类:
+Solution(int[][] rects)用给定的矩形数组rects 初始化对象。
+int[] pick() 返回一个随机的整数点 [u, v] 在给定的矩形所覆盖的空间内。
+*/
+
+type Solution struct {
+	rects [][]int
+}
+
+
+func Constructor(rects [][]int) Solution {
+	return Solution{
+		rects: rects,
+	}
+}
+
+
+func (this *Solution) Pick() []int {
+	nums := []int{}
+	nums = append(nums, 0)
+	for i, rect := range this.rects {
+		nums = append(nums, nums[i] + (rect[2] - rect[0] + 1) * (rect[3] - rect[1] + 1))
+	}
+
+	randi := rand.Intn(nums[len(nums) - 1])
+	iRect := sort.SearchInts(nums, randi + 1) - 1
+	points := randi - nums[iRect]
+	col := points % (this.rects[iRect][3] - this.rects[iRect][1] + 1)
+	row := points / (this.rects[iRect][3] - this.rects[iRect][1] + 1)
+	if row < 0 {
+		row = -row
+	}
+	return []int{this.rects[iRect][0] + row, this.rects[iRect][1] + col}
+}
+
+
+/**
+ * Your RandPointSolution object will be instantiated and called as such:
+ * obj := Constructor(rects);
+ * param_1 := obj.Pick();
+ */
+

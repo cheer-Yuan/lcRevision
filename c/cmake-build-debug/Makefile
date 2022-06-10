@@ -126,32 +126,32 @@ c\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\build
 .PHONY : c\fast
 
-algebra.obj: algebra.cpp.obj
+binarySearch.obj: binarySearch.cpp.obj
 
-.PHONY : algebra.obj
+.PHONY : binarySearch.obj
 
 # target to build an object file
-algebra.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\algebra.cpp.obj
-.PHONY : algebra.cpp.obj
+binarySearch.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\binarySearch.cpp.obj
+.PHONY : binarySearch.cpp.obj
 
-algebra.i: algebra.cpp.i
+binarySearch.i: binarySearch.cpp.i
 
-.PHONY : algebra.i
+.PHONY : binarySearch.i
 
 # target to preprocess a source file
-algebra.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\algebra.cpp.i
-.PHONY : algebra.cpp.i
+binarySearch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\binarySearch.cpp.i
+.PHONY : binarySearch.cpp.i
 
-algebra.s: algebra.cpp.s
+binarySearch.s: binarySearch.cpp.s
 
-.PHONY : algebra.s
+.PHONY : binarySearch.s
 
 # target to generate assembly for a file
-algebra.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\algebra.cpp.s
-.PHONY : algebra.cpp.s
+binarySearch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\binarySearch.cpp.s
+.PHONY : binarySearch.cpp.s
 
 dfs.obj: dfs.cpp.obj
 
@@ -207,6 +207,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\main.cpp.s
 .PHONY : main.cpp.s
 
+maths.obj: maths.cpp.obj
+
+.PHONY : maths.obj
+
+# target to build an object file
+maths.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\maths.cpp.obj
+.PHONY : maths.cpp.obj
+
+maths.i: maths.cpp.i
+
+.PHONY : maths.i
+
+# target to preprocess a source file
+maths.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\maths.cpp.i
+.PHONY : maths.cpp.i
+
+maths.s: maths.cpp.s
+
+.PHONY : maths.s
+
+# target to generate assembly for a file
+maths.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\c.dir\maths.cpp.s
+.PHONY : maths.cpp.s
+
 recursive.obj: recursive.cpp.obj
 
 .PHONY : recursive.obj
@@ -243,15 +270,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... c
-	@echo ... algebra.obj
-	@echo ... algebra.i
-	@echo ... algebra.s
+	@echo ... binarySearch.obj
+	@echo ... binarySearch.i
+	@echo ... binarySearch.s
 	@echo ... dfs.obj
 	@echo ... dfs.i
 	@echo ... dfs.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... maths.obj
+	@echo ... maths.i
+	@echo ... maths.s
 	@echo ... recursive.obj
 	@echo ... recursive.i
 	@echo ... recursive.s
