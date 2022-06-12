@@ -1,10 +1,7 @@
 package main
 
 import (
-	"database/sql/driver"
 	"fmt"
-	"go/ast"
-	"go/constant"
 	"math"
 	"math/rand"
 	"sort"
@@ -335,7 +332,6 @@ func maxRotateFunction(nums []int) int {
 	return result
 }
 
-
 /*
 给你一个由若干单词组成的句子sentence ，单词间由空格分隔。每个单词仅由大写和小写英文字母组成。
 请你将句子转换为 “山羊拉丁文（Goat Latin）”（一种类似于 猪拉丁文- Pig Latin 的虚构语言）。山羊拉丁文的规则如下：
@@ -389,7 +385,6 @@ func toGoatLatin(sentence string) string {
 	return result
 }
 
-
 /*按奇偶排序数组
 给你一个整数数组 nums，将 nums 中的的所有偶数元素移动到数组的前面，后跟所有奇数元素。返回满足此条件的 任一数组 作为答案。
 
@@ -402,11 +397,11 @@ func sortArrayByParity(nums []int) []int {
 	length := len(nums)
 
 	for true {
-		i, j := 0, length - 1
-		for i < j && nums[i] % 2 == 0 {
+		i, j := 0, length-1
+		for i < j && nums[i]%2 == 0 {
 			i++
 		}
-		for i < j && nums[j] % 2 != 0 {
+		for i < j && nums[j]%2 != 0 {
 			j--
 		}
 
@@ -421,7 +416,6 @@ func sortArrayByParity(nums []int) []int {
 
 	return nums
 }
-
 
 /* 建立四叉树
 给你一个 n * n 矩阵 grid ，矩阵由若干 0 和 1 组成。请你用四叉树表示该矩阵 grid 。你需要返回能表示矩阵的 四叉树 的根结点。注意，当 isLeaf 为 False 时，你可以把 True 或者 False 赋值给节点，两种值都会被判题机制 接受 。
@@ -449,22 +443,22 @@ class Node {
 具体地，我们用递归函数 dfs(r_0, c_0, r_1, c_1)处理给定的矩阵， 首先判定这一部分是否均为 0 或 1，如果是，那么这一部分对应的是一个叶节点，我们构造出对应的叶节点并结束递归；如果不是，那么这一部分对应的是一个非叶节点，我们需要将其分成四个部分。根据这两条分界线递归地调用 \text{dfs}dfs 函数得到四个部分对应的树，再将它们对应地挂在非叶节点的四个子节点上。
 */
 type Node struct {
-	Val bool
-	IsLeaf bool
-	TopLeft *Node
-	TopRight *Node
-	BottomLeft *Node
+	Val         bool
+	IsLeaf      bool
+	TopLeft     *Node
+	TopRight    *Node
+	BottomLeft  *Node
 	BottomRight *Node
-	}
+}
 
 func construct(grid [][]int) *Node {
-	  var dfs func([][]int, int, int) *Node		// the start and fin of columns as int
-	  dfs = func(rows [][]int, r0, r1 int) *Node {
+	var dfs func([][]int, int, int) *Node // the start and fin of columns as int
+	dfs = func(rows [][]int, r0, r1 int) *Node {
 		value := rows[0][r0]
-		for _, row := range rows{
+		for _, row := range rows {
 			for j := r0; j < r1; j++ {
 				if row[j] != value {
-					midR, midC := len(rows) / 2, (r1 - r0) / 2 + r0	// to locate the subdivided grid
+					midR, midC := len(rows)/2, (r1-r0)/2+r0 // to locate the subdivided grid
 					// recursive construction
 					return &Node{
 						false,
@@ -478,11 +472,10 @@ func construct(grid [][]int) *Node {
 			}
 		}
 		return &Node{value == 1, true, nil, nil, nil, nil}
-	  }
+	}
 
-	  return dfs(grid, 0, len(grid))
+	return dfs(grid, 0, len(grid))
 }
-
 
 /* 最小差值 I
 给你一个整数数组 nums，和一个整数 k 。在一个操作中，您可以选择 0 <= i < nums.length 的任何索引 i 。将 nums[i] 改为 nums[i] + x ，其中 x 是一个范围为 [-k, k] 的整数。对于每个索引 i ，最多 只能 应用 一次 此操作。
@@ -503,13 +496,12 @@ func smallestRangeI(nums []int, k int) int {
 		}
 	}
 
-	if max - min <= 2 * k {
+	if max-min <= 2*k {
 		return 0
 	} else {
-		return (max - min) - 2 * k
+		return (max - min) - 2*k
 	}
 }
-
 
 /*两棵二叉搜索树中的所有元素
 给你 root1 和 root2 这两棵二叉搜索树。请你返回一个列表，其中包含 两棵树 中的所有整数并按 升序 排序。.
@@ -551,7 +543,6 @@ func getAllElements(root1 *TreeNode, root2 *TreeNode) []int {
 
 	return result
 }
-
 
 /*标签验证器
 给定一个表示代码片段的字符串，你需要实现一个验证器来解析这段代码，并返回它是否合法。合法的代码片段需要遵守以下的所有规则：
@@ -636,30 +627,30 @@ func isValid1(code string) bool {
 	// parse labels
 	parseOP, labelEnds := true, false
 	nLabels, parseLabel, labelLength, labels := 0, false, 0, []string{}
-	if code[0] != '<' || code[len(code) - 1] != '>' {
+	if code[0] != '<' || code[len(code)-1] != '>' {
 		return false
 	}
 
-	for i := 0; i < len(code) ; i++  {
+	for i := 0; i < len(code); i++ {
 		if labelEnds {
 			return false
 		}
 
-		if parseLabel {										// if started parsing a label
-			if code[i] == '/' && code[i - 1] == '<'  {								// legal closing label
+		if parseLabel { // if started parsing a label
+			if code[i] == '/' && code[i-1] == '<' { // legal closing label
 				continue
 			}
-			if code[i] == '>' {								// exit label mode
-				if labelLength == 0 || labelLength >9 {		// illegal length
+			if code[i] == '>' { // exit label mode
+				if labelLength == 0 || labelLength > 9 { // illegal length
 					return false
 				}
-				if parseOP {								// op : add a label, close : check a label
-					labels = append(labels, code[i - labelLength:i])
+				if parseOP { // op : add a label, close : check a label
+					labels = append(labels, code[i-labelLength:i])
 				} else {
-					if code[i - labelLength:i] == labels[len(labels) - 1] {
-						labels = labels[:len(labels) - 1]
+					if code[i-labelLength:i] == labels[len(labels)-1] {
+						labels = labels[:len(labels)-1]
 						if nLabels == 0 {
-							labelEnds  = true
+							labelEnds = true
 						}
 					} else {
 						return false
@@ -667,20 +658,20 @@ func isValid1(code string) bool {
 				}
 				labelLength = 0
 				parseLabel = false
-			} else if code[i] < 'A' || code[i] > 'Z' {		// invalid label content
+			} else if code[i] < 'A' || code[i] > 'Z' { // invalid label content
 				return false
-			} else {										// valid label content
-				labelLength ++
+			} else { // valid label content
+				labelLength++
 			}
 		}
 
 		// remove cdata : <![CDATA[ + ... + ]]>
-		if code[i] == '<' {									// count labels
-			if i + 9 < len(code) {
-				if code[i + 1:i + 9] == "![CDATA[" && len(labels) != 0 {
-					for j := i + 9; j < len(code) - 3; j++ {
-						if code [j:j + 3] == "]]>" {		// remove the cdata
-							code = code[:i] + code[j + 3:]
+		if code[i] == '<' { // count labels
+			if i+9 < len(code) {
+				if code[i+1:i+9] == "![CDATA[" && len(labels) != 0 {
+					for j := i + 9; j < len(code)-3; j++ {
+						if code[j:j+3] == "]]>" { // remove the cdata
+							code = code[:i] + code[j+3:]
 							i = i - 2
 							break
 						}
@@ -689,23 +680,23 @@ func isValid1(code string) bool {
 			}
 
 			if code[i] == '<' {
-				if code[i + 1] != '/' {							// meet op labels
+				if code[i+1] != '/' { // meet op labels
 					parseOP = true
-					nLabels ++
-				} else {										// meet closing labels
+					nLabels++
+				} else { // meet closing labels
 					parseOP = false
-					nLabels --
+					nLabels--
 				}
-				parseLabel = true								// start parsing labels
+				parseLabel = true // start parsing labels
 			}
 		}
 
-		if nLabels < 0 {									// illegally surrounded by labels
+		if nLabels < 0 { // illegally surrounded by labels
 			return false
 		}
 	}
 
-	if nLabels != 0 {										// not closed
+	if nLabels != 0 { // not closed
 		return false
 	}
 	return true
@@ -727,51 +718,51 @@ func isValid(code string) bool {
 
 	for i := 0; i < length; i++ {
 		if code[i] == '<' {
-			if i + 1 >= length {
+			if i+1 >= length {
 				return false
-			} else if code[i + 1] == '/' {							// meet an ed label
-				if len(labels) == 0 {								// no op label
+			} else if code[i+1] == '/' { // meet an ed label
+				if len(labels) == 0 { // no op label
 					return false
 				} else {
 					lenLabel, label := 1, ""
-					for code[i + 1 + lenLabel] >= 'A' && code[i + 1 + lenLabel] <= 'Z' {
-						label = label + string(code[i + 1 + lenLabel])
+					for code[i+1+lenLabel] >= 'A' && code[i+1+lenLabel] <= 'Z' {
+						label = label + string(code[i+1+lenLabel])
 						lenLabel++
 					}
-					if code[i + 1 + lenLabel] == '>' {				// pop the last op label
-						if labels[len(labels) - 1] == label {
-							labels = labels[0:len(labels) - 1]
+					if code[i+1+lenLabel] == '>' { // pop the last op label
+						if labels[len(labels)-1] == label {
+							labels = labels[0 : len(labels)-1]
 							i = i + 1 + lenLabel
 							continue
 						} else {
-							return false							// different op label
+							return false // different op label
 						}
-					} else {										// illegal ed label
+					} else { // illegal ed label
 						return false
 					}
 				}
-			} else if code[i + 1] == '!' {							// meet a cdata
-				if i + 12 < len(code) {
-					if code[i + 1:i + 9] == "![CDATA[" {
-						for j := i + 9; j + 2 < len(code); j++ {
-							if code[j:j + 3] == "]]>" {
+			} else if code[i+1] == '!' { // meet a cdata
+				if i+12 < len(code) {
+					if code[i+1:i+9] == "![CDATA[" {
+						for j := i + 9; j+2 < len(code); j++ {
+							if code[j:j+3] == "]]>" {
 								i = j + 2
 								break
 							}
 						}
 					}
 				}
-				return false										// illegal cdata
-			} else if code[i + 1] >= 'A' && code[i + 1] <= 'Z' {	// meet an op label
+				return false // illegal cdata
+			} else if code[i+1] >= 'A' && code[i+1] <= 'Z' { // meet an op label
 				lenLabel, label := 1, ""
-				for i + lenLabel < length && code[i + lenLabel] >= 'A' && code[i + lenLabel] <= 'Z' {
-					label = label + string(1)		// NOT VALID
+				for i+lenLabel < length && code[i+lenLabel] >= 'A' && code[i+lenLabel] <= 'Z' {
+					label = label + string(1) // NOT VALID
 					lenLabel++
 				}
-				if code[i + 1 + lenLabel] == '>' {
+				if code[i+1+lenLabel] == '>' {
 					labels = append(labels, label)
 				} else {
-					return false									// illegal op label
+					return false // illegal op label
 				}
 			}
 		}
@@ -782,7 +773,6 @@ func isValid(code string) bool {
 		return false
 	}
 }
-
 
 /*
 给你一个日志数组 logs。每条日志都是以空格分隔的字串，其第一个字为字母与数字混合的 标识符 。
@@ -807,40 +797,39 @@ func reorderLogFiles(logs []string) []string {
 	ampute = func(str string) string {
 		for i := 0; i < len(str); i++ {
 			if str[i] == ' ' {
-				return str[i + 1:]
+				return str[i+1:]
 			}
 		}
 		return ""
 	}
 
-	var amputeComp func(str1, str2 string) string			// return if str2 >=< str1 without tag
+	var amputeComp func(str1, str2 string) string // return if str2 >=< str1 without tag
 	amputeComp = func(str1, str2 string) string {
 		temp1, temp2 := ampute(str1), ampute(str2)
 
 		if temp1 > temp2 {
 			return ">"
-		} else if temp1 ==  temp2 {
+		} else if temp1 == temp2 {
 			return "="
 		} else {
 			return "<"
 		}
 	}
 
-	for index, strs := range logs{
+	for index, strs := range logs {
 		fmt.Println(strs, logs)
-		if ampute(strs)[0] > '9' {								// reorder if meet a letter
+		if ampute(strs)[0] > '9' { // reorder if meet a letter
 			switchIndex := index
-			for i := index - 1; i >= 0; i-- {					// compare with the previous, if ok, switch
-				 if ampute(logs[i])[0] <= '9' || amputeComp(strs, logs[i]) == "<" || amputeComp(strs, logs[i]) == "=" && strs < logs[i]{
-					 logs[i], logs[switchIndex] = logs[switchIndex], logs[i]
-				 	 switchIndex = i
-				 }
+			for i := index - 1; i >= 0; i-- { // compare with the previous, if ok, switch
+				if ampute(logs[i])[0] <= '9' || amputeComp(strs, logs[i]) == "<" || amputeComp(strs, logs[i]) == "=" && strs < logs[i] {
+					logs[i], logs[switchIndex] = logs[switchIndex], logs[i]
+					switchIndex = i
+				}
 			}
 		}
 	}
 	return logs
 }
-
 
 /*
 共有 n 名小伙伴一起做游戏。小伙伴们围成一圈，按 顺时针顺序 从 1 到 n 编号。确切地说，从第 i 名小伙伴顺时针移动一位会到达第 (i+1) 名小伙伴的位置，其中 1 <= i < n ，从第 n 名小伙伴顺时针移动一位会回到第 1 名小伙伴的位置。
@@ -882,11 +871,12 @@ func findTheWinner1(n int, k int) int {
 		for elim >= len(list) {
 			elim -= len(list)
 		}
-		list = append(list[:elim], list[elim + 1:]...)
+		list = append(list[:elim], list[elim+1:]...)
 	}
 
 	return list[0] + 1
 }
+
 /*
 约瑟夫环——公式法（递推公式）
 相当于把数组向前移动M位。若已知N-1个人时，胜利者的下标位置f(N−1,M)，则N个人的时候，就是往后移动M位，(因为有可能数组越界，超过的部分会被接到头上，所以还要模N)，既f(N,M)=(f(N−1,M)+M)%n
@@ -899,7 +889,6 @@ func findTheWinner(n int, k int) int {
 
 	return result + 1
 }
-
 
 /*乘积小于 K 的子数组
 给你一个整数数组 nums 和一个整数 k ，请你返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目。
@@ -934,7 +923,6 @@ func numSubarrayProductLessThanK(nums []int, k int) int {
 	return result
 }
 
-
 /*最近的请求次数
 写一个RecentCounter类来计算特定时间范围内最近的请求。
 请你实现 RecentCounter 类：
@@ -966,15 +954,14 @@ type RecentCounter []int
 //	return
 //}
 
-func (this *RecentCounter) Ping(t int) int {		// ping : 收到一个请求。在每次收到请求的时候都要返回三秒内的请求数
-	*this = append(*this, t)						// 入队列
-	for (*this)[0] < t - 3000 {
+func (this *RecentCounter) Ping(t int) int { // ping : 收到一个请求。在每次收到请求的时候都要返回三秒内的请求数
+	*this = append(*this, t) // 入队列
+	for (*this)[0] < t-3000 {
 		*this = (*this)[1:]
 	}
 
 	return len(*this)
 }
-
 
 /*最小基因变化
 基因序列可以示为一条由 8 个字符组成的字符串，其中每个字符都是 'A'、'C'、'G' 和 'T' 之一。
@@ -1013,7 +1000,6 @@ func minMutation(start string, end string, bank []string) int {
 
 }
 
-
 /*数组中重复的数据
 给你一个长度为 n 的整数数组 nums ，其中 nums 的所有整数都在范围 [1, n] 内，且每个整数出现 一次 或 两次 。请你找出所有出现 两次 的整数，并以数组形式返回。
 你必须设计并实现一个时间复杂度为 O(n) 且仅使用常量额外空间的算法解决此问题。
@@ -1028,7 +1014,6 @@ func findDuplicates(nums []int) []int {
 	result := []int{}
 	temp := 0
 
-
 	for i := 0; i < len(nums); i++ {
 		if nums[i] < 0 {
 			temp = -nums[i]
@@ -1036,14 +1021,13 @@ func findDuplicates(nums []int) []int {
 			temp = nums[i]
 		}
 
-		if nums[temp - 1] < 0 {
+		if nums[temp-1] < 0 {
 			result = append(result, temp)
 		}
-		nums[temp - 1] = -nums[temp - 1]
+		nums[temp-1] = -nums[temp-1]
 	}
 	return result
 }
-
 
 /*
 由范围 [0,n] 内所有整数组成的 n + 1 个整数的排列序列可以表示为长度为 n 的字符串 s ，其中:
@@ -1069,7 +1053,7 @@ func diStringMatch(s string) []int {
 	}
 	result = append(result)
 
-	if result[len(s) - 1] == left {
+	if result[len(s)-1] == left {
 		result = append(result, right)
 	} else {
 		result = append(result, left)
@@ -1077,7 +1061,6 @@ func diStringMatch(s string) []int {
 
 	return result
 }
-
 
 /*
 序列化是将数据结构或对象转换为一系列位的过程，以便它可以存储在文件或内存缓冲区中，或通过网络连接链路传输，以便稍后在同一个或另一个计算机环境中重建。
@@ -1102,7 +1085,6 @@ func diStringMatch(s string) []int {
 */
 
 type Codec struct {
-
 }
 
 //func Constructor() (_ Codec) {
@@ -1138,21 +1120,20 @@ func (this *Codec) deserialize(data string) *TreeNode {
 	var construct func(int, int) *TreeNode
 	construct = func(lower int, upper int) *TreeNode {
 		if len(sep) == 0 {
-			return nil			// return when all seperated values removed
+			return nil // return when all seperated values removed
 		}
 
-		val, _ := strconv.Atoi(sep[len(sep) - 1])
-		if val < lower || val > upper {			// leaf node, return nil for its leaves`
+		val, _ := strconv.Atoi(sep[len(sep)-1])
+		if val < lower || val > upper { // leaf node, return nil for its leaves`
 			return nil
 		}
-		sep = sep[:len(sep) - 1]				// remove the processed node
+		sep = sep[:len(sep)-1] // remove the processed node
 
 		return &TreeNode{Val: val, Right: construct(val, upper), Left: construct(lower, val)}
 	}
 
 	return construct(math.MinInt32, math.MaxInt32)
 }
-
 
 /*一次编辑
 字符串有三种编辑操作:插入一个字符、删除一个字符或者替换一个字符。 给定两个字符串，编写一个函数判定它们是否只需要一次(或者零次)编辑。
@@ -1173,7 +1154,7 @@ func oneEditAway(first string, second string) bool {
 	}
 
 	len1, len2 := len(first), len(second)
-	if len1 + 1 < len2 || len2 + 1 < len1 {
+	if len1+1 < len2 || len2+1 < len1 {
 		return false
 	}
 
@@ -1196,10 +1177,10 @@ func oneEditAway(first string, second string) bool {
 			}
 
 			if len1 < len2 {
-				second = second[:i] + second[i + 1:]
+				second = second[:i] + second[i+1:]
 				i--
 			} else if len1 > len2 {
-				first = first[:i] + first[i + 1:]
+				first = first[:i] + first[i+1:]
 			}
 
 			used = true
@@ -1208,7 +1189,6 @@ func oneEditAway(first string, second string) bool {
 
 	return true
 }
-
 
 /*贴纸拼词
 我们有 n 种不同的贴纸。每个贴纸上都有一个小写的英文单词。
@@ -1231,28 +1211,28 @@ target有2^m个子序列，dp(子序列)为所需的最小贴纸数。对于某�
 func minStickers(stickers []string, target string) int {
 	length := len(target)
 
-	masks := make([]int, 1 << length) 		// 2 ^ n, 长度等于子序列数量
+	masks := make([]int, 1<<length) // 2 ^ n, 长度等于子序列数量
 	for i := range masks {
 		masks[i] = -1
 	}
-	masks[0]	= 0
+	masks[0] = 0
 
 	var dp func(int) int
-	dp = func(mask int) int {				// dp函数的作用是，输入mask：还需要解决哪些状态，返回：最少需要的卡片数
-		if masks[mask] != -1 {					// 如果没有需要解决的状态，就不需要卡片，那么直接return 0
+	dp = func(mask int) int { // dp函数的作用是，输入mask：还需要解决哪些状态，返回：最少需要的卡片数
+		if masks[mask] != -1 { // 如果没有需要解决的状态，就不需要卡片，那么直接return 0
 			return masks[mask]
 		}
-		masks[mask] = length + 1				// 不会需要length+1张卡片，把这个设置为初始最大值
+		masks[mask] = length + 1 // 不会需要length+1张卡片，把这个设置为初始最大值
 
-		for _, sticker := range stickers {		// 对于每一个贴纸
+		for _, sticker := range stickers { // 对于每一个贴纸
 			left := mask
 			count := [26]int{}
-			for _, caracter := range sticker {			// 对于某个贴纸里的每一个字母
-				count[caracter - 'a']++					// 用列表统计该贴纸的每个字母数量
+			for _, caracter := range sticker { // 对于某个贴纸里的每一个字母
+				count[caracter-'a']++ // 用列表统计该贴纸的每个字母数量
 			}
-			for index, caracter := range target {	// 对于目标单词
-				if mask >> index & 1 == 1 && count[caracter - 'a'] > 0 {	// 如果第i位恰好没解决，且第i位的字母，卡片sticker还有，
-					count[caracter - 'a']--										// 那么就把sticker的这个字母减下来，然后把然后把这一位解决掉
+			for index, caracter := range target { // 对于目标单词
+				if mask>>index&1 == 1 && count[caracter-'a'] > 0 { // 如果第i位恰好没解决，且第i位的字母，卡片sticker还有，
+					count[caracter-'a']-- // 那么就把sticker的这个字母减下来，然后把然后把这一位解决掉
 					left ^= 1 << index
 				}
 			}
@@ -1263,13 +1243,12 @@ func minStickers(stickers []string, target string) int {
 		return masks[mask]
 	}
 
-	ans := dp(1 << length - 1)
+	ans := dp(1<<length - 1)
 	if ans <= length {
 		return ans
 	}
 	return -1
 }
-
 
 /*最大三角形面积
 给定包含多个点的集合，从其中取三个点组成三角形，返回能组成的最大三角形的面积。
@@ -1285,7 +1264,6 @@ func largestTriangleArea(points [][]int) float64 {
 
 }
 
-
 /*乘法表中第k小的数
 给定高度m 、宽度n 的一张 m * n的乘法表，以及正整数k，你需要返回表中第k 小的数字。
 
@@ -1294,22 +1272,21 @@ func largestTriangleArea(points [][]int) float64 {
 i < floor(x/n) 时， floor(x/i) > n
 */
 func findKthNumber(m int, n int, k int) int {
-	left, right := 1, m * n		// 二分查找的左右边界
+	left, right := 1, m*n // 二分查找的左右边界
 	for left < right {
-		x := left + (right - left) / 2	// 二分的中点
-		sum := x / n * n				// sum 的前n部分
-		for i := x / n + 1; i < m; i++ {
+		x := left + (right-left)/2 // 二分的中点
+		sum := x / n * n           // sum 的前n部分
+		for i := x/n + 1; i < m; i++ {
 			sum += x / i
 		}
-		if sum >= k {					// 不超过x的数的数量大于等于k：向左移动右边界
+		if sum >= k { // 不超过x的数的数量大于等于k：向左移动右边界
 			right = x
-		} else {						// 否则移动左边界
+		} else { // 否则移动左边界
 			left = x + 1
 		}
 	}
 	return left
 }
-
 
 /*最少移动次数使数组元素相等 II
 给你一个长度为 n 的整数数组 nums ，返回使所有数组元素相等需要的最少移动数。在一步操作中，你可以使数组中的一个元素加 1 或者减 1 。
@@ -1325,7 +1302,7 @@ func findKthNumber(m int, n int, k int) int {
 */
 func minMoves2(nums []int) int {
 	sort.Ints(nums)
-	n := nums[len(nums) / 2]
+	n := nums[len(nums)/2]
 
 	result := 0
 	for _, i := range nums {
@@ -1338,7 +1315,6 @@ func minMoves2(nums []int) int {
 
 	return result
 }
-
 
 /*
 给你一个区间数组 intervals ，其中intervals[i] = [starti, endi] ，且每个starti 都 不同 。区间 i 的 右侧区间 可以记作区间 j ，并满足 startj>= endi ，且 startj 最小化 。
@@ -1357,14 +1333,14 @@ intervals[i].length == 2
 */
 func findRightInterval(intervals [][]int) []int {
 	n := len(intervals)
-	type pair struct{value, index int}
-	start, end := make([]pair, n), make([]pair, n)		// 起始点and结束点从小到大排序
-	for index, i := range intervals {					// 问题转化为求两个有序数组start和end。对end中每个元素找start中最小的大于它的值
+	type pair struct{ value, index int }
+	start, end := make([]pair, n), make([]pair, n) // 起始点and结束点从小到大排序
+	for index, i := range intervals {              // 问题转化为求两个有序数组start和end。对end中每个元素找start中最小的大于它的值
 		start[index] = pair{i[0], index}
 		end[index] = pair{i[1], index}
 	}
 
-	sort.Slice(start, func(i, j int) bool {				// 根据第一个元素排序
+	sort.Slice(start, func(i, j int) bool { // 根据第一个元素排序
 		return start[i].value < start[j].value
 	})
 	sort.Slice(end, func(i, j int) bool {
@@ -1372,7 +1348,7 @@ func findRightInterval(intervals [][]int) []int {
 	})
 
 	result := make([]int, n)
-	j := 0												// 已排序，每次直接从j开始比较
+	j := 0 // 已排序，每次直接从j开始比较
 	for _, e := range end {
 		for j < n && start[j].value < e.value {
 			j++
@@ -1394,7 +1370,6 @@ func findRightInterval(intervals [][]int) []int {
 func isUnivalTree(root *TreeNode) bool {
 	return root == nil || (root.Left == nil || root.Val == root.Left.Val && isUnivalTree(root.Left)) && (root.Right == nil || root.Val == root.Right.Val && isUnivalTree(root.Right))
 }
-
 
 /*
 在无限长的数轴（即 x 轴）上，我们根据给定的顺序放置对应的正方形方块。
@@ -1451,15 +1426,15 @@ func fallingSquares(positions [][]int) []int {
 	topAll := 0
 	for index, cube := range positions {
 		top := 0
-		for length := cube[0]; length < cube[0] + cube[1]; length++ {
+		for length := cube[0]; length < cube[0]+cube[1]; length++ {
 			if mapHeight[length] > top {
 				top = mapHeight[length]
 			}
 		}
-		for length := cube[0]; length < cube[0] + cube[1]; length++ {
+		for length := cube[0]; length < cube[0]+cube[1]; length++ {
 			mapHeight[length] = top + cube[1]
 		}
-		if top + cube[1] > topAll {
+		if top+cube[1] > topAll {
 			topAll = top + cube[1]
 		}
 		result = append(result, topAll)
@@ -1467,7 +1442,6 @@ func fallingSquares(positions [][]int) []int {
 
 	return result
 }
-
 
 /*单词距离
 有个内含单词的超大文本文件，给定任意两个不同的单词，找出在这个文件中这两个单词的最短距离(相隔单词数)。如果寻找过程在这个文件中会重复多次，而每次寻找的单词不同，你能对此优化吗?
@@ -1479,7 +1453,7 @@ func fallingSquares(positions [][]int) []int {
 目标：一次遍历
 */
 func findClosest(words []string, word1 string, word2 string) int {
-	index1, index2 := -1, -1			// 适配首位有/没有目标单词之一
+	index1, index2 := -1, -1 // 适配首位有/没有目标单词之一
 
 	result := len(words)
 	for index, i := range words {
@@ -1488,10 +1462,10 @@ func findClosest(words []string, word1 string, word2 string) int {
 		} else if i == word2 {
 			index2 = index
 		}
-		if index1 != index2 && index1 >= 0 && index2 >= 0{
+		if index1 != index2 && index1 >= 0 && index2 >= 0 {
 			dist := index1 - index2
 			if dist < 0 {
-				dist = - dist
+				dist = -dist
 			}
 			if dist < result {
 				result = dist
@@ -1501,7 +1475,6 @@ func findClosest(words []string, word1 string, word2 string) int {
 
 	return result
 }
-
 
 /*
 有效括号字符串为空 ""、"(" + A + ")"或A + B ，其中A 和B都是有效的括号字符串，+代表字符串的连接。
@@ -1562,7 +1535,6 @@ func removeOuterParentheses(s string) string {
 
 	return result
 }
-
 
 /*
 给定一个字符串queryIP。如果是有效的 IPv4 地址，返回 "IPv4" ；如果是有效的 IPv6 地址，返回 "IPv6" ；如果不是上述类型的 IP 地址，返回 "Neither" 。
@@ -1630,7 +1602,6 @@ func validIPAddress(queryIP string) string {
 	return "Neither"
 }
 
-
 /*从根到叶的二进制数之和
 给出一棵二叉树，其上每个结点的值都是0或1。每一条从根到叶的路径都代表一个从最高有效位开始的二进制数。
 例如，如果路径为0 -> 1 -> 1 -> 0 -> 1，那么它表示二进制数01101，也就是13。
@@ -1651,14 +1622,14 @@ func validIPAddress(queryIP string) string {
  */
 func sumRootToLeaf(root *TreeNode) int {
 	var dfs func(node *TreeNode, val int) int
-	dfs = func(node *TreeNode, val int) int {		// 有返回值，使用有序遍历
-		if node == nil {							// 空节点：返回零
+	dfs = func(node *TreeNode, val int) int { // 有返回值，使用有序遍历
+		if node == nil { // 空节点：返回零
 			return 0
 		}
 
-		val = val << 1 | node.Val					// 左移1位 ：增加一个二进制数后的进位变化。对此数按位取或：若等于1则+1
+		val = val<<1 | node.Val // 左移1位 ：增加一个二进制数后的进位变化。对此数按位取或：若等于1则+1
 
-		if node.Left == nil && node.Right == nil {	// 空节点：返回
+		if node.Left == nil && node.Right == nil { // 空节点：返回
 			return val
 		}
 
@@ -1667,7 +1638,6 @@ func sumRootToLeaf(root *TreeNode) int {
 
 	return dfs(root, 0)
 }
-
 
 /*外星文字典
 现有一种使用英语字母的外星文语言，这门语言的字母顺序与英语顺序不同。
@@ -1681,7 +1651,6 @@ func sumRootToLeaf(root *TreeNode) int {
 func alienOrder(words []string) string {
 
 }
-
 
 /*连续整数求和
 给定一个正整数 n，返回 连续正整数满足所有数字之和为 n 的组数 。
@@ -1699,9 +1668,7 @@ func alienOrder(words []string) string {
 func consecutiveNumbersSum(n int) int {
 	result := 0
 
-
 }
-
 
 /*
 每个 有效电子邮件地址 都由一个 本地名 和一个 域名 组成，以 '@' 符号分隔。除小写字母之外，电子邮件地址还可以含有一个或多个'.' 或 '+' 。
@@ -1747,7 +1714,6 @@ func numUniqueEmails(emails []string) int {
 	return result
 }
 
-
 /*
 给定圆的半径和圆心的位置，实现函数 randPoint ，在圆中产生均匀随机点。
 
@@ -1756,35 +1722,33 @@ RandPointSolution(double radius, double x_center, double y_center)用圆的半�
 randPoint()返回圆内的一个随机点。圆周上的一点被认为在圆内。答案作为数组返回 [x, y] 。
 */
 type RandPointSolution struct {
-	radius float64
+	radius   float64
 	x_center float64
 	y_center float64
 }
 
-
 func RandPointConstructor(radius float64, x_center float64, y_center float64) RandPointSolution {
 	return RandPointSolution{
-		radius: radius,
+		radius:   radius,
 		x_center: x_center,
 		y_center: y_center,
 	}
 }
 
-
 func (this *RandPointSolution) RandPoint() []float64 {
 	for {
-		x, y := rand.Float64() * 2 - 1, rand.Float64() * 2 - 1
-		if x * x + y * y < 1 {
-			return []float64{x * this.radius + this.x_center, y * this.radius + this.y_center}
+		x, y := rand.Float64()*2-1, rand.Float64()*2-1
+		if x*x+y*y < 1 {
+			return []float64{x*this.radius + this.x_center, y*this.radius + this.y_center}
 		}
 	}
 }
+
 /**
  * Your RandPointSolution object will be instantiated and called as such:
  * obj := Constructor(radius, x_center, y_center);
  * param_1 := obj.RandPoint();
  */
-
 
 /*
 给定一个由非重叠的轴对齐矩形的数组 rects ，其中 rects[i] = [ai, bi, xi, yi] 表示 (ai, bi) 是第 i 个矩形的左下角点，(xi, yi) 是第 i 个矩形的右上角角点。设计一个算法来随机挑选一个被某一矩形覆盖的整数点。矩形周长上的点也算做是被矩形覆盖。所有满足要求的点必须等概率被返回。
@@ -1800,23 +1764,21 @@ type Solution struct {
 	rects [][]int
 }
 
-
 func Constructor(rects [][]int) Solution {
 	return Solution{
 		rects: rects,
 	}
 }
 
-
 func (this *Solution) Pick() []int {
 	nums := []int{}
 	nums = append(nums, 0)
 	for i, rect := range this.rects {
-		nums = append(nums, nums[i] + (rect[2] - rect[0] + 1) * (rect[3] - rect[1] + 1))
+		nums = append(nums, nums[i]+(rect[2]-rect[0]+1)*(rect[3]-rect[1]+1))
 	}
 
-	randi := rand.Intn(nums[len(nums) - 1])
-	iRect := sort.SearchInts(nums, randi + 1) - 1
+	randi := rand.Intn(nums[len(nums)-1])
+	iRect := sort.SearchInts(nums, randi+1) - 1
 	points := randi - nums[iRect]
 	col := points % (this.rects[iRect][3] - this.rects[iRect][1] + 1)
 	row := points / (this.rects[iRect][3] - this.rects[iRect][1] + 1)
@@ -1826,10 +1788,82 @@ func (this *Solution) Pick() []int {
 	return []int{this.rects[iRect][0] + row, this.rects[iRect][1] + col}
 }
 
-
 /**
  * Your RandPointSolution object will be instantiated and called as such:
  * obj := Constructor(rects);
  * param_1 := obj.Pick();
  */
 
+/*将字符串翻转到单调递增
+如果一个二进制字符串，是以一些 0（可能没有 0）后面跟着一些 1（也可能没有 1）的形式组成的，那么该字符串是 单调递增 的。
+给你一个二进制字符串 s，你可以将任何 0 翻转为 1 或者将 1 翻转为 0 。
+返回使 s 单调递增的最小翻转次数。
+
+第i位的答案与第i-1位相关，联想使用动态规划。
+分析：第i位可以是0或1
+dp[i][0] = dp[i-1][0] + if(s[i] == 1) : 第i位若是0，则第i-1位必须是0。
+dp[i][1] = min(dp[i-1][1], dp[i-1][0]) + if(s[i] == 0) : 若第i位为1，则第i-1位可以是0或1。
+*/
+func minFlipsMonoIncr(s string) int {
+	dp := []int{0, 0}
+	for _, thisS := range s {
+		var dp0, dp1 int
+		if thisS == '1' {
+			dp0 = dp[0] + 1
+			dp1 = MinOf2(dp[0], dp[1])
+		} else {
+			dp0 = dp[0]
+			dp1 = MinOf2(dp[0], dp[1]) + 1
+		}
+		dp[0], dp[1] = dp0, dp1
+	}
+
+	return MinOf2(dp[0], dp[1])
+}
+
+/*
+你有一个单词列表words和一个模式pattern，你想知道 words 中的哪些单词与模式匹配。
+如果存在字母的排列 p，使得将模式中的每个字母 x 替换为 p(x) 之后，我们就得到了所需的单词，那么单词与模式是匹配的。
+（回想一下，字母的排列是从字母到字母的双射：每个字母映射到另一个字母，没有两个字母映射到同一个字母。）
+返回 words 中与给定模式匹配的单词列表。
+你可以按任何顺序返回答案。
+
+输入：words = ["abc","deq","mee","aqq","dkd","ccc"], pattern = "abb"
+输出：["mee","aqq"]
+解释：
+"mee" 与模式匹配，因为存在排列 {a -> m, b -> e, ...}。
+"ccc" 与模式不匹配，因为 {a -> c, b -> c, ...} 不是排列。
+因为 a 和 b 映射到同一个字母。
+*/
+func findAndReplacePattern(words []string, pattern string) []string {
+	result := []string{}
+	for _, word := range words {
+		bijection1, bijection2 := map[uint8]uint8{}, map[uint8]uint8{}
+		ifTrue := true
+		for index := 0; index < len(pattern); index++ {
+			val1, ok1 := bijection1[pattern[index]]
+			val2, ok2 := bijection2[word[index]]
+			if !ok1 || !ok2 {
+				if !ok1 {
+					bijection1[pattern[index]] = word[index]
+					val1, ok1 = bijection1[pattern[index]]
+				}
+				if !ok2 {
+					bijection2[word[index]] = pattern[index]
+					val2, ok2 = bijection2[word[index]]
+
+				}
+			}
+			if val1 == word[index] && val2 == pattern[index] {
+				continue
+			} else {
+				ifTrue = false
+				break
+			}
+		}
+		if ifTrue {
+			result = append(result, word)
+		}
+	}
+	return result
+}
