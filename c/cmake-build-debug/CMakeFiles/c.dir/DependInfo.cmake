@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/main.cpp" "CMakeFiles/c.dir/main.cpp.obj" "gcc" "CMakeFiles/c.dir/main.cpp.obj.d"
   "C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/maths.cpp" "CMakeFiles/c.dir/maths.cpp.obj" "gcc" "CMakeFiles/c.dir/maths.cpp.obj.d"
   "C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/recursive.cpp" "CMakeFiles/c.dir/recursive.cpp.obj" "gcc" "CMakeFiles/c.dir/recursive.cpp.obj.d"
+  "C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/sort.cpp" "CMakeFiles/c.dir/sort.cpp.obj" "gcc" "CMakeFiles/c.dir/sort.cpp.obj.d"
   )
 
 # Targets to which this target links.

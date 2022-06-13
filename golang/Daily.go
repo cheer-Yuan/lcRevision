@@ -1867,3 +1867,26 @@ func findAndReplacePattern(words []string, pattern string) []string {
 	}
 	return result
 }
+
+/*高度检查器
+校打算为全体学生拍一张年度纪念照。根据要求，学生需要按照 非递减 的高度顺序排成一行。
+排序后的高度情况用整数数组 expected 表示，其中 expected[i] 是预计排在这一行中第 i 位的学生的高度（下标从 0 开始）。
+给你一个整数数组 heights ，表示 当前学生站位 的高度情况。heights[i] 是这一行中第 i 位学生的高度（下标从 0 开始）。
+返回满足 heights[i] != expected[i] 的 下标数量 。
+*/
+func heightChecker(heights []int) int {
+	sorted := make([]int, len(heights))
+	for index, _ := range sorted {
+		sorted[index] = heights[index]
+	}
+	sort.Ints(sorted)
+	fmt.Println(heights, sorted)
+	result := 0
+	for index, _ := range heights {
+		if heights[index] != sorted[index] {
+			result++
+		}
+	}
+
+	return result
+}
