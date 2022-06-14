@@ -80,12 +80,12 @@ clean: CMakeFiles/c.dir/clean
 CMakeFiles/c.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\cheer\Desktop\MyDesktop\lcRevision\c\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\cheer\Desktop\MyDesktop\lcRevision\c\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target c"
 .PHONY : CMakeFiles/c.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/c.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\cheer\Desktop\MyDesktop\lcRevision\c\cmake-build-debug\CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\cheer\Desktop\MyDesktop\lcRevision\c\cmake-build-debug\CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/c.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\cheer\Desktop\MyDesktop\lcRevision\c\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/c.dir/rule

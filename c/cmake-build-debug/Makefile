@@ -128,6 +128,30 @@ c/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/build
 .PHONY : c/fast
 
+BorderConditions.obj: BorderConditions.cpp.obj
+.PHONY : BorderConditions.obj
+
+# target to build an object file
+BorderConditions.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/BorderConditions.cpp.obj
+.PHONY : BorderConditions.cpp.obj
+
+BorderConditions.i: BorderConditions.cpp.i
+.PHONY : BorderConditions.i
+
+# target to preprocess a source file
+BorderConditions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/BorderConditions.cpp.i
+.PHONY : BorderConditions.cpp.i
+
+BorderConditions.s: BorderConditions.cpp.s
+.PHONY : BorderConditions.s
+
+# target to generate assembly for a file
+BorderConditions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/BorderConditions.cpp.s
+.PHONY : BorderConditions.cpp.s
+
 binarySearch.obj: binarySearch.cpp.obj
 .PHONY : binarySearch.obj
 
@@ -329,6 +353,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... c
+	@echo ... BorderConditions.obj
+	@echo ... BorderConditions.i
+	@echo ... BorderConditions.s
 	@echo ... binarySearch.obj
 	@echo ... binarySearch.i
 	@echo ... binarySearch.s

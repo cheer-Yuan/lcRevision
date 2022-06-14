@@ -1890,3 +1890,47 @@ func heightChecker(heights []int) int {
 
 	return result
 }
+
+/*对角线遍历
+给你一个大小为 m x n 的矩阵 mat ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。
+*/
+func findDiagonalOrder(mat [][]int) []int {
+	nRow, nCol := len(mat), len(mat[0])
+	result := []int{}
+	if nRow == 1 {
+		return mat[0]
+	}
+	if nCol == 1 {
+		for _, i := range mat {
+			result = append(result, i[0])
+		}
+		return result
+	}
+
+	i, j, step := 0, 0, 1
+	ifChange := true
+	for i < nRow && j < nCol {
+		result = append(result, mat[i][j])
+		if i == nRow-1 && j == nCol-1 {
+			return result
+		}
+
+		if ifChange && ((i == 0 || i == nRow-1) || (j == 0 || j == nCol-1)) {
+			ifChange = false
+			step = -step
+			if (i == 0 || i == nRow-1) && j < nCol-1 {
+				j++
+				continue
+			}
+			if (j == 0 || j == nCol-1) && i < nRow-1 {
+				i++
+				continue
+			}
+		}
+
+		ifChange = true
+		i -= step
+		j += step
+	}
+	return nil
+}

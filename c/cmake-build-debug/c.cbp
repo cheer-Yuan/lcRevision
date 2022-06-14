@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/BorderConditions.cpp">
+			<Option target="c"/>
+		</Unit>
 		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/binarySearch.cpp">
 			<Option target="c"/>
 		</Unit>

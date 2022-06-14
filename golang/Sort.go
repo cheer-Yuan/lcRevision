@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-
 //// time : average O(nlogn), worst O(n2)
 //func QSParint(a []int, min, max int)  {
 //
@@ -12,8 +11,6 @@ import "fmt"
 //
 //
 //}
-
-
 
 func Partition(list []int, low, high int) int {
 	// may use a random method to set the pivot
@@ -42,10 +39,10 @@ func Partition(list []int, low, high int) int {
 }
 
 func QuickSort(list []int, low, high int) {
-	if high > low{
+	if high > low {
 		pivot := Partition(list, low, high)
 
-		QuickSort(list, low, pivot - 1)
-		QuickSort(list, pivot + 1, high)
+		QuickSort(list, low, pivot-1)
+		QuickSort(list, pivot+1, high)
 	}
 }
