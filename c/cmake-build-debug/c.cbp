@@ -4,112 +4,112 @@
 	<Project>
 		<Option title="c"/>
 		<Option makefile_is_custom="1"/>
-		<Option compiler="gcc"/>
+		<Option compiler="msvc8"/>
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug"/>
+				<Option working_dir="D:/Study/lcRevision/c/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="c">
-				<Option output="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/c.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug"/>
+				<Option output="D:/Study/lcRevision/c/cmake-build-debug/c.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Study/lcRevision/c/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="gcc"/>
+				<Option compiler="msvc8"/>
 				<Compiler>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 c"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 c"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="c/fast">
-				<Option output="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/c.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug"/>
+				<Option output="D:/Study/lcRevision/c/cmake-build-debug/c.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Study/lcRevision/c/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="gcc"/>
+				<Option compiler="msvc8"/>
 				<Compiler>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
-					<Add directory="C:/Program Files/JetBrains/CLion 2020.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 c/fast"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 c/fast"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug"/>
+				<Option working_dir="D:/Study/lcRevision/c/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug"/>
+				<Option working_dir="D:/Study/lcRevision/c/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.2/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\Study\lcRevision\c\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/BorderConditions.cpp">
+		<Unit filename="D:/Study/lcRevision/c/BorderConditions.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/binarySearch.cpp">
+		<Unit filename="D:/Study/lcRevision/c/binarySearch.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/dfs.cpp">
+		<Unit filename="D:/Study/lcRevision/c/dfs.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/dp.cpp">
+		<Unit filename="D:/Study/lcRevision/c/dp.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/hashmap.cpp">
+		<Unit filename="D:/Study/lcRevision/c/hashmap.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/main.cpp">
+		<Unit filename="D:/Study/lcRevision/c/main.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/maths.cpp">
+		<Unit filename="D:/Study/lcRevision/c/maths.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/recursive.cpp">
+		<Unit filename="D:/Study/lcRevision/c/recursive.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/sort.cpp">
+		<Unit filename="D:/Study/lcRevision/c/sort.cpp">
 			<Option target="c"/>
 		</Unit>
-		<Unit filename="C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/CMakeLists.txt">
+		<Unit filename="D:/Study/lcRevision/c/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
