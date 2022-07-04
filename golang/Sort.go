@@ -1,6 +1,10 @@
-package others
+package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"sort"
+)
 
 //// time : average O(nlogn), worst O(n2)
 //func QSParint(a []int, min, max int)  {
@@ -45,4 +49,26 @@ func QuickSort(list []int, low, high int) {
 		QuickSort(list, low, pivot-1)
 		QuickSort(list, pivot+1, high)
 	}
+}
+
+/*最小绝对差
+给你个整数数组 arr，其中每个元素都 不相同。
+请你找到所有具有最小绝对差的元素对，并且按升序的顺序返回。
+*/
+func minimumAbsDifference(arr []int) [][]int {
+	sort.Ints(arr)
+
+	results := [][]int{}
+	minDiff := math.MaxInt
+	for i := 1; i < len(arr); i++ {
+		if arr[i]-arr[i-1] < minDiff {
+			results = [][]int{}
+			minDiff = arr[i] - arr[i-1]
+			results = append(results, []int{arr[i-1], arr[i]})
+		} else if minDiff == arr[i]-arr[i-1] {
+			results = append(results, []int{arr[i-1], arr[i]})
+		}
+	}
+
+	return results
 }

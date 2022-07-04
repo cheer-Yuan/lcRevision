@@ -6,7 +6,31 @@
 #include <stdlib.h>
 #include <string>
 #include <unordered_map>
+#include <algorithm>
+
 using namespace std;
+
+class Solution {
+public:
+    vector<vector<int>> minimumAbsDifference(vector<int>& arr) {
+        sort(arr.begin(), arr.end());                                //  #include <algorithm>
+
+        vector<vector<int>> results;
+        int minDiff = INT_MAX;
+        for (int i = 1; i < arr.size(); ++i) {
+            int diff = arr[i] - arr[i - 1];
+            if (diff < minDiff) {
+                results.clear();
+                minDiff = diff;
+                results.emplace_back(vector<int>{arr[i - 1], arr[i]});
+            } else if (diff == minDiff) {
+                results.emplace_back(vector<int>{arr[i - 1], arr[i]});
+            }
+        }
+
+        return results;
+    }
+};
 
 /*高度检查器
 校打算为全体学生拍一张年度纪念照。根据要求，学生需要按照 非递减 的高度顺序排成一行。
@@ -14,7 +38,7 @@ using namespace std;
 给你一个整数数组 heights ，表示 当前学生站位 的高度情况。heights[i] 是这一行中第 i 位学生的高度（下标从 0 开始）。
 返回满足 heights[i] != expected[i] 的 下标数量 。
 */
-class Solution {
+class heightCheckerSolution {
 public:
     void QuickSort(vector<int>& nums, int left, int right) {
         if (left < right) {

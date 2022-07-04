@@ -55,7 +55,7 @@ public:
 Solution(int[][] rects)用给定的矩形数组rects 初始化对象。
 int[] pick() 返回一个随机的整数点 [u, v] 在给定的矩形所覆盖的空间内。
 */
-class Solution {
+class pickSolution {
 private:
     mt19937 gen{random_device{}()};
     uniform_int_distribution<int> dis;      // 生成整数[a, b]
@@ -63,7 +63,7 @@ private:
     vector<int> sums;
 
 public:
-    Solution(vector<vector<int>>& rects) : rects{rects}, dis(0, sums.back() - 1) {
+    pickSolution(vector<vector<int>>& rects) : rects{rects}, dis(0, sums.back() - 1) {
         this->sums.emplace_back(0);     // add a value to the vector
         for (auto &rect : rects) {
             this->sums.emplace_back(sums.back() + (rect[2] - rect[0] + 1) * (rect[3] - rect[1] + 1));    // back : take the last value
@@ -97,3 +97,30 @@ public:
  * Solution* obj = new Solution(rects);
  * vector<int> param_1 = obj->pick();
  */
+
+
+/*7. 整数反转
+给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。
+如果反转后整数超过 32 位的有符号整数的范围[−231, 231− 1] ，就返回 0。
+假设环境不允许存储 64 位整数（有符号或无符号）。
+
+判断反转后的数字是否超过 3232 位有符号整数的范围 : −2 ^ 31 ≤ rev ⋅ 10 + digit ≤ 2 ^ 31 −1 若该不等式不成立则返回 0。
+INT_MAX = 2147483647 = INT_MAX / 10 * 10 + 7
+所以比较 rev 与 INTMAX / 10，digit 与 7 之间的大小关系
+*/
+class Solution {
+public:
+    int reverse(int x) {
+        int rev = 0, digit = 0;
+
+        while (x != 0) {
+            if (rev < INT32_MIN / 10 || rev > INT32_MAX / 10) return 0;
+            digit = x % 10;
+            rev *= 10;
+            rev += digit;
+            x /= 10;
+        }
+
+        return rev;
+    }
+};
