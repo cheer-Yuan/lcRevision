@@ -248,6 +248,30 @@ hashmap.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/hashmap.cpp.s
 .PHONY : hashmap.cpp.s
 
+int.obj: int.cpp.obj
+.PHONY : int.obj
+
+# target to build an object file
+int.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/int.cpp.obj
+.PHONY : int.cpp.obj
+
+int.i: int.cpp.i
+.PHONY : int.i
+
+# target to preprocess a source file
+int.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/int.cpp.i
+.PHONY : int.cpp.i
+
+int.s: int.cpp.s
+.PHONY : int.s
+
+# target to generate assembly for a file
+int.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\c.dir\build.make CMakeFiles/c.dir/int.cpp.s
+.PHONY : int.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -368,6 +392,9 @@ help:
 	@echo ... hashmap.obj
 	@echo ... hashmap.i
 	@echo ... hashmap.s
+	@echo ... int.obj
+	@echo ... int.i
+	@echo ... int.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

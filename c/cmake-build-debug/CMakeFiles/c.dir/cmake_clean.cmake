@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/c.dir/dp.cpp.obj.d"
   "CMakeFiles/c.dir/hashmap.cpp.obj"
   "CMakeFiles/c.dir/hashmap.cpp.obj.d"
+  "CMakeFiles/c.dir/int.cpp.obj"
+  "CMakeFiles/c.dir/int.cpp.obj.d"
   "CMakeFiles/c.dir/main.cpp.obj"
   "CMakeFiles/c.dir/main.cpp.obj.d"
   "CMakeFiles/c.dir/maths.cpp.obj"

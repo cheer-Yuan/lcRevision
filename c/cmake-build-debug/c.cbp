@@ -97,6 +97,9 @@
 		<Unit filename="C:/Users/zhiyu/Desktop/EnhanceCoding/lcRevision/c/hashmap.cpp">
 			<Option target="c"/>
 		</Unit>
+		<Unit filename="C:/Users/zhiyu/Desktop/EnhanceCoding/lcRevision/c/int.cpp">
+			<Option target="c"/>
+		</Unit>
 		<Unit filename="C:/Users/zhiyu/Desktop/EnhanceCoding/lcRevision/c/main.cpp">
 			<Option target="c"/>
 		</Unit>
