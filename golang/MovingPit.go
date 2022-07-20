@@ -9,17 +9,16 @@ double next(int val)成员函数 next每次调用的时候都会往滑动窗口�
 */
 
 type MovingAverage struct {
-	Sum			int
-	Size		int
-	NumList		[]int
+	Sum     int
+	Size    int
+	NumList []int
 }
 
-
 /** Initialize your data structure here. */
-func Constructor(size int) MovingAverage {
+func MovingAverageConstructor(size int) MovingAverage {
 	return MovingAverage{
-		Sum: 0,
-		Size: size,
+		Sum:     0,
+		Size:    size,
 		NumList: make([]int, 0),
 	}
 }
@@ -45,7 +44,6 @@ func (this *MovingAverage) Next(val int) float64 {
 	numDiv := this.sum(val)
 	return float64(this.Sum) / float64(numDiv)
 }
-
 
 /**
  * Your MovingAverage object will be instantiated and called as such:

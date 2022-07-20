@@ -6,6 +6,7 @@
 			[
 				{
 					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.19"
@@ -38,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "c::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-c-Debug-8ee0704a3c6c24aa2dbc.json",
+					"jsonFile" : "target-c-Debug-c85d0383558fd7bfd1c0.json",
 					"name" : "c",
 					"projectIndex" : 0
 				}
@@ -48,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/Study/lcRevision/c/cmake-build-debug",
-		"source" : "D:/Study/lcRevision/c"
+		"build" : "C:/Users/cheer/Desktop/MyDesktop/lcRevision/c/cmake-build-debug",
+		"source" : "C:/Users/cheer/Desktop/MyDesktop/lcRevision/c"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 2
+		"minor" : 3
 	}
 }
